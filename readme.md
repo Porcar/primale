@@ -1,3 +1,17 @@
+Instalation:
+Be on www folder
+git clone - blah blah
+cd project name
+composer install
+php artisan vendor:publish
+cp .env.example .env
+php artisan key:generate
+edit .env with your info
+create database
+php artisan migrate
+php artisan db:seed
+
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
