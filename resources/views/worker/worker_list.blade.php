@@ -51,7 +51,7 @@
                             <th>Email</th>
                             <th>Sex</th>
                             <th>Age</th>
-                            @if (Auth::user()->role->name == "Admin")
+                            @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
                             <th class="not-export-col">Actions</th>
                             @endif
                         </tr>
@@ -70,7 +70,7 @@
                               @endif
                             </td>
                             <td>{{$user->worker->age}}</td>
-                            @if (Auth::user()->role->name == "Admin")
+                            @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
 							              <td>
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -90,7 +90,7 @@
                             <th>Email</th>
                             <th>Sex</th>
                             <th>Age</th>
-                            @if (Auth::user()->role->name == "Admin")
+                            @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
                             <th class="not-export-col hidden">Actions</th>
                             @endif
                         </tr>

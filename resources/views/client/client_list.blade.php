@@ -18,7 +18,7 @@
 @section('content')
 <div class="row">
         <div class="col-xs-12">
-          @if (Auth::user()->role->name != "Client")
+          @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
             <a href="{{route($routeGenerator->make('client.create', auth()->user()))}}" class="btn btn-block btn-danger">New Client</a>
           @endif
         </div>

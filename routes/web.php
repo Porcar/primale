@@ -72,3 +72,95 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::put('admin/users/client/update/{id}', [ 'as' => 'admin.client.update', 'uses' => 'AdminController@update_client']);
 
 });
+
+
+/*****************************PROVIDERS***********************************/
+
+Route::group(['middleware' => 'provider'], function () {
+
+	Route::get('provider', [ 'as' => 'provider', 'uses' => 'AdminController@index']);
+
+	Route::get('provider/profile', [ 'as' => 'provider.profile', 'uses' => 'AdminController@profile']);
+	Route::put('provider/{admin}', [ 'as' => 'provider.update', 'uses' => 'AdminController@update']);
+	Route::put('provider/password/{admin}', [ 'as' => 'provider.update.password', 'uses' => 'AdminController@update_password']);
+
+
+//Providers
+	Route::get('provider/users/provider', [ 'as' => 'provider.provider', 'uses' => 'AdminController@users_provider']);
+	Route::get('provider/users/provider/show/{id}', [ 'as' => 'provider.provider.show', 'uses' => 'AdminController@show_provider']);
+
+
+//Workers
+	Route::get('provider/users/worker', [ 'as' => 'provider.worker', 'uses' => 'AdminController@users_worker']);
+	Route::get('provider/users/worker/create', [ 'as' => 'provider.worker.create', 'uses' => 'AdminController@users_worker_create']);
+	Route::post('provider/worker/create', [ 'as' => 'provider.worker.post', 'uses' => 'AdminController@create_worker_user']);
+	Route::get('provider/users/worker/show/{id}', [ 'as' => 'provider.worker.show', 'uses' => 'AdminController@show_worker']);
+	Route::get('provider/users/worker/edit/{id}', [ 'as' => 'provider.worker.edit', 'uses' => 'AdminController@edit_worker']);
+	Route::put('provider/users/worker/update/{id}', [ 'as' => 'provider.worker.update', 'uses' => 'AdminController@update_worker']);
+
+
+
+//Clients
+	Route::get('provider/users/client', [ 'as' => 'provider.client', 'uses' => 'AdminController@users_client']);
+	Route::get('provider/users/client/show/{id}', [ 'as' => 'provider.client.show', 'uses' => 'AdminController@show_client']);
+
+
+});
+
+/*****************************WORKERS***********************************/
+
+Route::group(['middleware' => 'worker'], function () {
+
+	Route::get('worker', [ 'as' => 'worker', 'uses' => 'AdminController@index']);
+
+	Route::get('worker/profile', [ 'as' => 'worker.profile', 'uses' => 'AdminController@profile']);
+	Route::put('worker/{admin}', [ 'as' => 'worker.update', 'uses' => 'AdminController@update']);
+	Route::put('worker/password/{admin}', [ 'as' => 'worker.update.password', 'uses' => 'AdminController@update_password']);
+
+
+//Providers
+	Route::get('worker/users/provider', [ 'as' => 'worker.provider', 'uses' => 'AdminController@users_provider']);
+	Route::get('worker/users/provider/show/{id}', [ 'as' => 'worker.provider.show', 'uses' => 'AdminController@show_provider']);
+
+
+//Workers
+	Route::get('worker/users/worker', [ 'as' => 'worker.worker', 'uses' => 'AdminController@users_worker']);
+	Route::get('worker/users/worker/show/{id}', [ 'as' => 'worker.worker.show', 'uses' => 'AdminController@show_worker']);
+
+
+
+//Clients
+	Route::get('worker/users/client', [ 'as' => 'worker.client', 'uses' => 'AdminController@users_client']);
+	Route::get('worker/users/client/show/{id}', [ 'as' => 'worker.client.show', 'uses' => 'AdminController@show_client']);
+
+
+});
+
+/*****************************CLIENTS***********************************/
+
+Route::group(['middleware' => 'client'], function () {
+
+	Route::get('client', [ 'as' => 'client', 'uses' => 'AdminController@index']);
+
+	Route::get('client/profile', [ 'as' => 'client.profile', 'uses' => 'AdminController@profile']);
+	Route::put('client/{admin}', [ 'as' => 'client.update', 'uses' => 'AdminController@update']);
+	Route::put('client/password/{admin}', [ 'as' => 'client.update.password', 'uses' => 'AdminController@update_password']);
+
+
+//Providers
+	Route::get('client/users/provider', [ 'as' => 'client.provider', 'uses' => 'AdminController@users_provider']);
+	Route::get('client/users/provider/show/{id}', [ 'as' => 'client.provider.show', 'uses' => 'AdminController@show_provider']);
+
+
+//Workers
+	Route::get('client/users/worker', [ 'as' => 'client.worker', 'uses' => 'AdminController@users_worker']);
+	Route::get('client/users/worker/show/{id}', [ 'as' => 'client.worker.show', 'uses' => 'AdminController@show_worker']);
+
+
+
+//Clients
+	Route::get('client/users/client', [ 'as' => 'client.client', 'uses' => 'AdminController@users_client']);
+	Route::get('client/users/client/show/{id}', [ 'as' => 'client.client.show', 'uses' => 'AdminController@show_client']);
+
+
+});

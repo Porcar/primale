@@ -23,6 +23,20 @@ php artisan migrate
 php artisan db:seed
 
 
+Base users are:
+
+admin@primale.com
+pass: 1234
+
+provider@primale.com
+pass: 1234
+
+worker@primale.com
+pass: 1234
+
+client@primale.com
+pass: 1234
+
 
 # Laravel PHP Framework
 

@@ -18,7 +18,9 @@
 @section('content')
 
 
+
     <div class="row">
+      @if (Auth::user()->role->name == "Admin")
       <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-red">
@@ -32,6 +34,8 @@
               <a href="{{route($routeGenerator->make('provider.create', auth()->user()))}}" class="small-box-footer">More Information <i class="fa fa-arrow-circle-right"></i></a>
           </div>
       </div><!-- ./col -->
+      @endif
+      @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-red">
@@ -45,6 +49,8 @@
                 <a href="{{route($routeGenerator->make('worker.create', auth()->user()))}}" class="small-box-footer">More Information <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div><!-- ./col -->
+      @endif
+      @if (Auth::user()->role->name == "Admin")
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-red">
@@ -58,7 +64,7 @@
                 <a href="{{route($routeGenerator->make('client.create', auth()->user()))}}" class="small-box-footer">More Information <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div><!-- ./col -->
-
+  @endif
     </div><!-- /.row -->
     <div class="row">
       <div class="col-lg-3 col-xs-6">

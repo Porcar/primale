@@ -47,7 +47,7 @@
                         @else
                         <a class="btn btn-lg btn-danger" href="{{ route('login') }}">Login</a>
                         @endif
-                        <a class="btn btn-lg btn-white" href="{{route('logout')}}">Register</a>
+                        <a class="btn btn-lg btn-white" href="{{route('logout')}}">Logout</a>
                       </div>
                   </div>
               </div>
