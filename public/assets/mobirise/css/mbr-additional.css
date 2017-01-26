@@ -1,0 +1,87 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Lora:400,700);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,700);
+
+
+
+
+#index-menu-0 .hide-buttons .nav-btn {
+  display: none !important;
+}
+#index-menu-0 .navbar-caption {
+  color: #ffffff;
+}
+#index-menu-0 .navbar-toggler {
+  color: #ffffff;
+}
+#index-menu-0 .close-icon::before,
+#index-menu-0 .close-icon::after {
+  background-color: #ffffff;
+}
+#index-menu-0 .link,
+#index-menu-0 .dropdown-item {
+  color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+}
+#index-menu-0 .link {
+  font-size: 0.75rem;
+}
+#index-menu-0 .dropdown-item,
+#index-menu-0 .nav-dropdown-sm .link {
+  font-size: 0.812rem;
+}
+#index-menu-0 .link:hover,
+#index-menu-0 .dropdown-item:hover,
+#index-menu-0 .link:focus,
+#index-menu-0 .dropdown-item:focus {
+  color: #c0a375;
+}
+#index-menu-0 .link[aria-expanded="true"],
+#index-menu-0 .dropdown-menu {
+  background: #0e0e0e;
+}
+#index-menu-0 .nav-dropdown-sm .link:focus,
+#index-menu-0 .nav-dropdown-sm .link:hover,
+#index-menu-0 .nav-dropdown-sm .dropdown-item:focus,
+#index-menu-0 .nav-dropdown-sm .dropdown-item:hover {
+  background: #202020!important;
+}
+#index-menu-0 .navbar,
+#index-menu-0 .nav-dropdown-sm,
+#index-menu-0 .nav-dropdown-sm .link[aria-expanded="true"],
+#index-menu-0 .nav-dropdown-sm .dropdown-menu {
+  background: #282828;
+}
+#index-menu-0 .bg-color.transparent .link {
+  color: #ffffff;
+  transition: none;
+}
+#index-menu-0 .bg-color.transparent.opened .link {
+  transition: color 0.2s ease-in-out;
+}
+#index-menu-0 .bg-color.transparent.opened .link:hover,
+#index-menu-0 .bg-color.transparent.opened .link:focus {
+  color: #c0a375;
+}
+#index-menu-0 .link[aria-expanded="true"],
+#index-menu-0 .dropdown-item[aria-expanded="true"] {
+  color: #c0a375!important;
+}
+#index-pricing-table2-0 .mbr-plan-header,
+#index-pricing-table2-0 .mbr-plan-body {
+  background-color: #f4f4f4;
+}
+#index-pricing-table2-0 ul,
+#index-pricing-table2-0 .mbr-plan-title,
+#index-pricing-table2-0 .mbr-price-value,
+#index-pricing-table2-0 .mbr-price-figure,
+#index-pricing-table2-0 .mbr-price-term {
+  color: #28262b;
+}
+#index-pricing-table2-0 .mbr-plan {
+  border-color: #e8e8e8;
+}
+#index-pricing-table2-0 .mbr-plan .list-group-item {
+  border-color: #cfcfcf;
+}

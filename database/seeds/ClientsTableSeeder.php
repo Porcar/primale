@@ -11,6 +11,10 @@ class ClientsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+      DB::table('clients')->insert([
+          'sex' => False,
+          'age' => 20,
+          'user_id' => 4,
+      ]);
     }
 }
