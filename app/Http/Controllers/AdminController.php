@@ -164,11 +164,63 @@ class AdminController extends Controller
         $worker->user_id = $user->id;
         $worker->description = $request->input('description');
         $worker->age = $request->input('age');
+        $worker->price = $request->input('price');
         if ($request->input('sex') == "True") {
             $worker->sex = True;
         }else{
             $worker->sex = False;
         }
+
+        if ($request->input('monday_active') == True) {
+            $worker->monday_active = True;
+            $worker->monday_hours = $request->input('monday_hours');
+        }else{
+            $worker->monday_active = False;
+            $worker->monday_hours = 0;
+        }
+        if ($request->input('tuesday_active') == True) {
+            $worker->tuesday_active = True;
+            $worker->tuesday_hours = $request->input('tuesday_hours');
+        }else{
+            $worker->tuesday_active = False;
+            $worker->tuesday_hours = 0;
+        }
+        if ($request->input('wednesday_active') == True) {
+            $worker->wednesday_active = True;
+            $worker->wednesday_hours = $request->input('wednesday_hours');
+        }else{
+            $worker->wednesday_active = False;
+            $worker->wednesday_hours = 0;
+        }
+        if ($request->input('thursday_active') == True) {
+            $worker->thursday_active = True;
+            $worker->thursday_hours = $request->input('thursday_hours');
+        }else{
+            $worker->thursday_active = False;
+            $worker->thursday_hours = 0;
+        }
+        if ($request->input('friday_active') == True) {
+            $worker->friday_active = True;
+            $worker->friday_hours = $request->input('friday_hours');
+        }else{
+            $worker->friday_active = False;
+            $worker->friday_hours = 0;
+        }
+        if ($request->input('saturday_active') == True) {
+            $worker->saturday_active = True;
+            $worker->saturday_hours = $request->input('saturday_hours');
+        }else{
+            $worker->saturday_active = False;
+            $worker->saturday_hours = 0;
+        }
+        if ($request->input('sunday_active') == True) {
+            $worker->sunday_active = True;
+            $worker->sunday_hours = $request->input('sunday_hours');
+        }else{
+            $worker->sunday_active = False;
+            $worker->sunday_hours = 0;
+        }
+
         $worker->save();
 
 
@@ -210,6 +262,59 @@ class AdminController extends Controller
 
         $user->worker->description = $request->input('description');
         $user->worker->age = $request->input('age');
+        $user->worker->price = $request->input('price');
+
+
+        if ($request->input('monday_active') == True) {
+            $user->worker->monday_active = True;
+            $user->worker->monday_hours = $request->input('monday_hours');
+        }else{
+            $user->worker->monday_active = False;
+            $user->worker->monday_hours = 0;
+        }
+        if ($request->input('tuesday_active') == True) {
+            $user->worker->tuesday_active = True;
+            $user->worker->tuesday_hours = $request->input('tuesday_hours');
+        }else{
+            $user->worker->tuesday_active = False;
+            $user->worker->tuesday_hours = 0;
+        }
+        if ($request->input('wednesday_active') == True) {
+            $user->worker->wednesday_active = True;
+            $user->worker->wednesday_hours = $request->input('wednesday_hours');
+        }else{
+            $user->worker->wednesday_active = False;
+            $user->worker->wednesday_hours = 0;
+        }
+        if ($request->input('thursday_active') == True) {
+            $user->worker->thursday_active = True;
+            $user->worker->thursday_hours = $request->input('thursday_hours');
+        }else{
+            $user->worker->thursday_active = False;
+            $user->worker->thursday_hours = 0;
+        }
+        if ($request->input('friday_active') == True) {
+            $user->worker->friday_active = True;
+            $user->worker->friday_hours = $request->input('friday_hours');
+        }else{
+            $user->worker->friday_active = False;
+            $user->worker->friday_hours = 0;
+        }
+        if ($request->input('saturday_active') == True) {
+            $user->worker->saturday_active = True;
+            $user->worker->saturday_hours = $request->input('saturday_hours');
+        }else{
+            $user->worker->saturday_active = False;
+            $user->worker->saturday_hours = 0;
+        }
+        if ($request->input('sunday_active') == True) {
+            $user->worker->sunday_active = True;
+            $user->worker->sunday_hours = $request->input('sunday_hours');
+        }else{
+            $user->worker->sunday_active = False;
+            $user->worker->sunday_hours = 0;
+        }
+
         if ($request->input('sex') == "True") {
             $user->worker->sex = True;
         }else{

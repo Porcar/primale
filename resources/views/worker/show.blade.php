@@ -93,12 +93,46 @@
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
+                          <h5 class="description-header">Price</h5>
+                          <span class="description-text">{{$user->worker->price}} $ / Hour</span>
+                      </div><!-- /.description-block -->
+                  </div><!-- /.col -->
+                  <div class="col-xs-12">
+                      <div class="description-block">
                           <h5 class="description-header">Sex</h5>
                           <span class="description-text">
                               @if($user->worker->sex==1)
                               Female
                               @else
                               Male
+                              @endif
+                          </span>
+                      </div><!-- /.description-block -->
+                  </div><!-- /.col -->
+                  <div class="col-xs-12">
+                      <div class="description-block">
+                          <h5 class="description-header">Working Days</h5>
+                          <span class="description-text">
+                              @if($user->worker->monday_active==1)
+                                Monday : {{$user->worker->monday_hours}} Hours <br>
+                              @endif
+                              @if ($user->worker->tuesday_active==1)
+                                Tuesday: {{$user->worker->tuesday_hours}} Hours <br>
+                              @endif
+                              @if ($user->worker->wednesday_active==1)
+                                Wednesday: {{$user->worker->wednesday_hours}} Hours <br>
+                              @endif
+                              @if ($user->worker->thursday_active==1)
+                                Thursday: {{$user->worker->thursday_hours}} Hours<br>
+                              @endif
+                              @if ($user->worker->friday_active==1)
+                                Friday: {{$user->worker->friday_hours}} Hours<br>
+                              @endif
+                              @if ($user->worker->saturday_active==1)
+                                Saturday: {{$user->worker->saturday_hours}} Hours<br>
+                              @endif
+                              @if ($user->worker->sunday_active==1)
+                                Sunday: {{$user->worker->sunday_hours}} Hours<br>
                               @endif
                           </span>
                       </div><!-- /.description-block -->
