@@ -38,6 +38,11 @@
                         <i class="fa fa-child"></i> <span>Clients</span>
                     </a>
                     </li>
+                    <li>
+                    <a href="{{route($routeGenerator->make('sexdate', auth()->user()))}}">
+                        <i class="fa fa-child"></i> <span>SexDates</span>
+                    </a>
+                    </li>
 
         </ul>
     </section>
