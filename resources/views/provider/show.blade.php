@@ -1,5 +1,5 @@
 @extends('layouts.baseadmin')
-
+@inject('routeGenerator', 'App\Services\RouteGeneratorService')
 @section('page')
     Providers
 @endsection
@@ -15,6 +15,7 @@
 @endsection
 
 @section('content')
+
 
 <div class="row">
     <div class="col-xs-12">
@@ -90,5 +91,74 @@
       </div><!-- /.widget-user -->
     </div><!-- /.col -->
 </div>
+
+<div class="row"  style="margin-top:10px;">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">List of Workers</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table id="" class="table asc table-bordered table-striped">
+                    <thead>
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Sex</th>
+                            <th>Age</th>
+                            <th>Price / Hour</th>
+                            @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
+                            <th class="not-export-col">Actions</th>
+                            @endif
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($workers as $worker)
+                            <tr>
+                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $user->id)}}">{{$worker->user->name}}</a></td>
+                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $user->id)}}">{{$worker->user->lastname}}</td>
+                            <td>{{$worker->user->email}}</td>
+                            <td>
+                              @if($worker->sex == 0)
+                                Male
+                              @else
+                                Female
+                              @endif
+                            </td>
+                            <td>{{$worker->age}}</td>
+                            <td>{{$worker->price}} $</td>
+                            @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
+							              <td>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a href="{{route($routeGenerator->make('worker.edit', auth()->user()), $user->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
+                                    </div>
+                                </div>
+                            </td>
+                            @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Sex</th>
+                            <th>Age</th>
+                            <th>Price</th>
+                            @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
+                            <th class="not-export-col hidden">Actions</th>
+                            @endif
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
 
 @endsection

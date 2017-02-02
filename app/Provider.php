@@ -14,8 +14,9 @@ class Provider extends Model
       return $this->belongsTo('App\User');
   }
 
-  public function groups()
+
+    public function workers()
     {
-        return $this->hasMany('App\Group');
+        return $this->hasMany('App\Worker');
     }
 }

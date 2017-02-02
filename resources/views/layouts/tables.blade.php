@@ -40,6 +40,7 @@
                                    margin: [ 0, 0, 0, 0 ],
                                    alignment: 'left',
                                    pageSize: 'LETTER',
+                                   image: '',
                                    width: 150
                                  });
                            }
@@ -104,6 +105,7 @@
                                    margin: [ 0, 0, 0, 0 ],
                                    alignment: 'left',
                                    pageSize: 'LETTER',
+                                   image: '',
                                    width: 150
                                  });
                            }
@@ -167,6 +169,7 @@
                                    margin: [ 0, 0, 0, 0 ],
                                    alignment: 'left',
                                    pageSize: 'LETTER',
+                                   image: '',
                                    width: 150
                                  });
                            }
@@ -230,6 +233,7 @@
                                    margin: [ 0, 0, 0, 0 ],
                                    alignment: 'left',
                                    pageSize: 'LETTER',
+                                   image: '',
                                    width: 150
                                  });
                            }
@@ -291,7 +295,8 @@
                                doc.content.splice( 0, 0, {
                                    margin: [ 0, 0, 0, 0 ],
                                    alignment: 'left',
-                                   pageSize: 'LETTER',                                   
+                                   pageSize: 'LETTER',
+                                   image: '',
                                    width: 150
                                  });
                            }

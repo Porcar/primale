@@ -87,6 +87,12 @@
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
+                          <h5 class="description-header">Points</h5>
+                          <span class="description-text">{{$user->client->points}}</span>
+                      </div><!-- /.description-block -->
+                  </div><!-- /.col -->
+                  <div class="col-xs-12">
+                      <div class="description-block">
                           <h5 class="description-header">Sex</h5>
                           <span class="description-text">
                               @if($user->client->sex==1)

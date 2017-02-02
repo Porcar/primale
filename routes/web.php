@@ -71,6 +71,16 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('admin/users/client/edit/{id}', [ 'as' => 'admin.client.edit', 'uses' => 'AdminController@edit_client']);
 	Route::put('admin/users/client/update/{id}', [ 'as' => 'admin.client.update', 'uses' => 'AdminController@update_client']);
 
+
+	//Sexdates
+		Route::get('admin/users/sexdate', [ 'as' => 'admin.sexdate', 'uses' => 'AdminController@sexdate']);
+		Route::get('admin/users/sexdate/create', [ 'as' => 'admin.sexdate.create', 'uses' => 'AdminController@sexdate_create']);
+		Route::post('admin/sexdate/create', [ 'as' => 'admin.sexdate.post', 'uses' => 'AdminController@create_sexdate']);
+		Route::get('admin/users/sexdate/show/{id}', [ 'as' => 'admin.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
+		Route::get('admin/users/sexdate/edit/{id}', [ 'as' => 'admin.sexdate.edit', 'uses' => 'AdminController@edit_sexdate']);
+		Route::put('admin/users/sexdate/update/{id}', [ 'as' => 'admin.sexdate.update', 'uses' => 'AdminController@update_sexdate']);
+
+
 });
 
 

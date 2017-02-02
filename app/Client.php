@@ -15,6 +15,6 @@ class Client extends Model
   }
   public function sexdates()
   {
-      return $this->hasMany('App\SexDate');
+      return $this->hasMany('App\Sexdate');
   }
 }

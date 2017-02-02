@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SexDate extends Model
+class Sexdate extends Model
 {
   public function client()
   {

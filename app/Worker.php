@@ -9,19 +9,15 @@ class Worker extends Model
   /**
    * Get the user that owns the client.
    */
+
   public function user()
   {
       return $this->belongsTo('App\User');
   }
 
-  public function medias()
+  public function provider()
   {
-      return $this->hasMany('App\Media');
-  }
-
-  public function groups()
-  {
-      return $this->belongsToMany('App\Group');
+      return $this->belongsTo('App\Provider');
   }
 
   public function tags()
@@ -31,6 +27,6 @@ class Worker extends Model
 
   public function sexdates()
   {
-      return $this->hasMany('App\SexDate');
+      return $this->hasMany('App\Sexdate');
   }
 }

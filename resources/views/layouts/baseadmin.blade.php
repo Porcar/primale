@@ -82,7 +82,6 @@
    <!-- DataTables -->
    {!! Html::script('plugins/DataTables/datatables.js') !!}
 
-   <!-- page script -->
    <!--DataTables -->
    @yield('tables')
 
@@ -99,6 +98,7 @@
         placement: 'left'
 
       });
+
   </script>
 
 <!-- /Confirmations -->

@@ -51,10 +51,21 @@ class CreateWorkersTable extends Migration
           $table->boolean('sunday_active')->default(False);
           $table->integer('sunday_hours')->unsigned()->default(0);
 
+          $table->string('image1')->nullable();
+          $table->string('image2')->nullable();
+          $table->string('image3')->nullable();
+          $table->string('image4')->nullable();
+          $table->string('image5')->nullable();
+          $table->string('image6')->nullable();
+          $table->string('video')->nullable();
 
 
           $table->integer('user_id')->unsigned();
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
+
+          $table->integer('provider_id')->unsigned();
+          $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade')->onUpdate('cascade');
 
           $table->timestamps();
       });

@@ -43,7 +43,7 @@
               <h3 class="box-title">Edit Worker</h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-          {!! Form::model($user, array('route' => array($routeGenerator->make('worker.update', auth()->user()), $user->id),'method' => 'put',  'id'=>'form_event','class'=>'form-horizontal') ) !!}
+          {!! Form::model($user, array('route' => array($routeGenerator->make('worker.update', auth()->user()), $user->id),'method' => 'put',  'id'=>'form_event','class'=>'form-horizontal', 'files'=>true) ) !!}
               <div class="box-body">
 
                 <div class="form-group">
@@ -220,6 +220,60 @@
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">1st Picture</label>
+                  <div class="col-sm-10">
+                        <input type="file" id="image" name="image1">
+                        <p class="help-block">Image</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">2nd Picture</label>
+                  <div class="col-sm-10">
+                        <input type="file" id="image" name="image2">
+                        <p class="help-block">Image</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">3rd Picture</label>
+                  <div class="col-sm-10">
+                        <input type="file" id="image" name="image3">
+                        <p class="help-block">Image</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">4th Picture</label>
+                  <div class="col-sm-10">
+                        <input type="file" id="image" name="image4">
+                        <p class="help-block">Image</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">5th Picture</label>
+                  <div class="col-sm-10">
+                        <input type="file" id="image" name="image5">
+                        <p class="help-block">Image</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">6th Picture</label>
+                  <div class="col-sm-10">
+                        <input type="file" id="image" name="image6">
+                        <p class="help-block">Image</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Video</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('video', $user->worker->video, array('class' => 'form-control', 'placeholder'=>'Video URL' ) ) !!}
+                  </div>
+                </div>
 
 
               </div><!-- /.box-body -->

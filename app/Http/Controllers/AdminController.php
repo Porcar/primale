@@ -11,6 +11,8 @@ use Auth;
 use App\Provider;
 use App\Worker;
 use App\Client;
+use App\Sexdate;
+use App\Stock;
 use App\Role;
 use App\Services\RouteGeneratorService;
 
@@ -60,7 +62,7 @@ class AdminController extends Controller
       $user->credential = $request->input('credential');
       $user->phone = $request->input('phone');
       $user->address = $request->input('address');
-      $user->password = bcrypt('1q2w3e4r5t');
+      $user->password = bcrypt('1234');
       $user->image = 'img/avatar.png';
       $user->active = True;
       $user->role_id = 2;
@@ -112,8 +114,10 @@ class AdminController extends Controller
   public function show_provider($id)
   {
       $user = User::find($id);
+      $provider = $user->provider;
+      $workers = Worker::where('provider_id',$provider->id)->get();
 
-      return view("provider.show")->with(compact('user'));
+      return view("provider.show")->with(compact('user','workers'));
   }
 
     public function users_worker()
@@ -131,20 +135,15 @@ class AdminController extends Controller
     {
         $messages = [];
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'lastname' => 'required',
             'username' => 'unique:users',
             'credential' => 'required|unique:users',
             'email' => 'required|unique:users',
-            'phone' => 'required',
-            'sex' => 'required',
-            'age' => 'required',
-            'address' => 'required',
         ],$messages);
 
         if ($validator->fails()) {
             return redirect(url()->previous())->withErrors($validator)->withInput();
         }
+
 
         $user = new User();
         $user->name = $request->input('name');
@@ -154,7 +153,7 @@ class AdminController extends Controller
         $user->credential = $request->input('credential');
         $user->phone = $request->input('phone');
         $user->address = $request->input('address');
-        $user->password = bcrypt('1q2w3e4r5t');
+        $user->password = bcrypt('1234');
         $user->image = 'img/avatar.png';
         $user->active = True;
         $user->role_id = 3;
@@ -165,6 +164,11 @@ class AdminController extends Controller
         $worker->description = $request->input('description');
         $worker->age = $request->input('age');
         $worker->price = $request->input('price');
+        if(Auth::user()->role->name == "Admin"){
+          $worker->provider_id = Auth::user()->id;
+        }else{
+        $worker->provider_id = Auth::user()->provider->id;
+        }
         if ($request->input('sex') == "True") {
             $worker->sex = True;
         }else{
@@ -221,8 +225,8 @@ class AdminController extends Controller
             $worker->sunday_hours = 0;
         }
 
-        $worker->save();
 
+        $worker->save();
 
 
         return redirect()->route('admin.worker');
@@ -320,10 +324,91 @@ class AdminController extends Controller
         }else{
             $user->worker->sex = False;
         }
+
+
+
+
+        if ($request->file('image1')) {
+            if ($request->file('image1')->isValid())
+            {
+                $destinationPath = base_path() . '/public/img/';
+                $image_name = $request->file('image1')->getClientOriginalName();
+                $image = $request->file('image1')->move($destinationPath, $image_name);
+                $image_name = $image->getBasename();
+                $user->worker->image1 = "img/".$image_name;
+            }
+        }
+        if ($request->file('image2')) {
+            if ($request->file('image2')->isValid())
+            {
+                $destinationPath = base_path() . '/public/img/';
+                $image_name = $request->file('image2')->getClientOriginalName();
+                $image = $request->file('image2')->move($destinationPath, $image_name);
+                $image_name = $image->getBasename();
+                $user->worker->image2 = "img/".$image_name;
+            }
+        }
+        if ($request->file('image3')) {
+            if ($request->file('image3')->isValid())
+            {
+                $destinationPath = base_path() . '/public/img/';
+                $image_name = $request->file('image3')->getClientOriginalName();
+                $image = $request->file('image3')->move($destinationPath, $image_name);
+                $image_name = $image->getBasename();
+                $user->worker->image3 = "img/".$image_name;
+            }
+        }
+        if ($request->file('image4')) {
+            if ($request->file('image4')->isValid())
+            {
+                $destinationPath = base_path() . '/public/img/';
+                $image_name = $request->file('image4')->getClientOriginalName();
+                $image = $request->file('image4')->move($destinationPath, $image_name);
+                $image_name = $image->getBasename();
+                $user->worker->image4 = "img/".$image_name;
+            }
+        }
+        if ($request->file('image5')) {
+            if ($request->file('image5')->isValid())
+            {
+                $destinationPath = base_path() . '/public/img/';
+                $image_name = $request->file('image5')->getClientOriginalName();
+                $image = $request->file('image5')->move($destinationPath, $image_name);
+                $image_name = $image->getBasename();
+                $user->worker->image5 = "img/".$image_name;
+            }
+        }
+        if ($request->file('image6')) {
+            if ($request->file('image6')->isValid())
+            {
+                $destinationPath = base_path() . '/public/img/';
+                $image_name = $request->file('image6')->getClientOriginalName();
+                $image = $request->file('image6')->move($destinationPath, $image_name);
+                $image_name = $image->getBasename();
+                $user->worker->image6 = "img/".$image_name;
+            }
+        }
+
+        $user->worker->video = $this->YoutubeID($request->input('video'));
         $user->worker->save();
 
-
         return redirect()->route($routeGenerator->make('worker', auth()->user()));
+    }
+
+
+    function YoutubeID($url)
+    {
+        if(strlen($url) > 11)
+        {
+            if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match))
+            {
+                return $match[1];
+            }
+            else
+                return false;
+        }
+
+        return $url;
     }
 
 
@@ -374,7 +459,7 @@ class AdminController extends Controller
             $user->credential = $request->input('credential');
             $user->phone = $request->input('phone');
             $user->address = $request->input('address');
-            $user->password = bcrypt('1q2w3e4r5t');
+            $user->password = bcrypt('1234');
             $user->image = 'img/avatar.png';
             $user->active = True;
             $user->role_id = 4;
@@ -448,8 +533,68 @@ class AdminController extends Controller
 
 
 
+        public function sexdate_create()
+        {
+            $workers = Worker::all();
+            return view("sexdate.create")->with(compact('workers'));
+        }
+
+        public function create_sexdate(Request $request, RouteGeneratorService $routeGenerator)
+        {
+
+
+            $sexdate = new Sexdate();
+            $sexdate->worker_id = $request->input('worker_id');
+            $sexdate->date = $request->input('date');
+            $sexdate->status = 1;
+            $sexdate->hours = $request->input('hours');
+            $sexdate->observation = $request->input('observation');
+            if(Auth::user()->role->name == "Admin"){
+              $sexdate->client_id = Auth::user()->id;
+            }else{
+              $sexdate->client_id = Auth::user()->client->id;
+            }
+            $sexdate->save();
+
+
+            return redirect()->route('admin.sexdate');
+        }
+
+        public function edit_sexdate($id)
+        {
+            $user = User::find($id);
+
+            return view("sexdate.edit")->with(compact('user'));
+        }
+
+        public function update_sexdate(Request $request, $id, RouteGeneratorService $routeGenerator)
+        {
 
 
 
+            $sexdate = Sexdate::find($id);
+            $sexdate->date = $request->input('date');
+            $sexdate->status = $request->input('status');
+            $sexdate->hours = $request->input('hours');
+            $sexdate->observation = $request->input('observation');
+            $sexdate->save();
+
+
+            return redirect()->route($routeGenerator->make('sexdate', auth()->user()));
+        }
+
+
+
+          public function show_sexdate($id)
+            {
+                $sexdate = Sexdate::find($id);
+                return view("sexdate.show")->with(compact('sexdate'));
+            }
+
+            public function sexdate()
+            {
+              $sexdate = Sexdate::all();
+              return view('sexdate.sexdate_list')->with(compact('sexdate'));
+            }
 
 }

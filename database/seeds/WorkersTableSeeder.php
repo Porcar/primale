@@ -20,6 +20,7 @@ class WorkersTableSeeder extends Seeder
           'start_date' => '2005-09-23',
           'end_date' => '2015-09-23',
           'user_id' => 3,
+          'provider_id' => 1,
 
       ]);
     }

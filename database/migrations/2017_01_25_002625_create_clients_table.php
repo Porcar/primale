@@ -17,11 +17,11 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->boolean('sex')->default(False);
             $table->integer('age');
-
+            $table->integer('points')->default(0);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 
