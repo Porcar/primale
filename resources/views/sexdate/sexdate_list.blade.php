@@ -29,6 +29,16 @@
     </div>
 </div>
 
+<div class="row">
+        <div class="col-xs-12">
+          @if (Auth::user()->role->name == "Admin" OR Auth::user()->role->name == "Client")
+            <a href="{{route($routeGenerator->make('sexdate.create', auth()->user()))}}" class="btn btn-block btn-danger">New Sexdate</a>
+          @endif
+        </div>
+</div>
+
+<br>
+
 
 <div class="row"  style="margin-top:10px;">
     <div class="col-xs-12">
@@ -50,7 +60,7 @@
                     <tbody>
                         @foreach ($sexdate as $sexdate)
                         <tr>
-                            <td>{{$sexdate->id}}</td>
+                            <td><a href="{{route($routeGenerator->make('sexdate.show', auth()->user()), $sexdate->id)}}">{{$sexdate->id}}</td>
                             <td>{{$sexdate->created_at->toFormattedDateString()}}</td>
                             <td>{{$sexdate->created_at->toTimeString()}}</td>
                             <td>{{$sexdate->worker->user->name}}</td>

@@ -77,10 +77,15 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('admin/users/sexdate/create', [ 'as' => 'admin.sexdate.create', 'uses' => 'AdminController@sexdate_create']);
 		Route::post('admin/sexdate/create', [ 'as' => 'admin.sexdate.post', 'uses' => 'AdminController@create_sexdate']);
 		Route::get('admin/users/sexdate/show/{id}', [ 'as' => 'admin.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
-		Route::get('admin/users/sexdate/edit/{id}', [ 'as' => 'admin.sexdate.edit', 'uses' => 'AdminController@edit_sexdate']);
-		Route::put('admin/users/sexdate/update/{id}', [ 'as' => 'admin.sexdate.update', 'uses' => 'AdminController@update_sexdate']);
+		Route::get('admin/sexdate/delete/{id}', [ 'as' => 'admin.sexdate.delete', 'uses' => 'AdminController@delete_sexdate']);
 
-
+		//stock
+		Route::get('admin/stock', [ 'as' => 'admin.stock', 'uses' => 'AdminController@stock']);
+		Route::get('admin/stock/create', [ 'as' => 'admin.stock.create', 'uses' => 'AdminController@stock_create']);
+		Route::post('admin/stock/create', [ 'as' => 'admin.stock.post', 'uses' => 'AdminController@create_stock']);
+		Route::get('admin/stock/edit/{id}', [ 'as' => 'admin.stock.edit', 'uses' => 'AdminController@edit_stock']);
+		Route::put('admin/stock/update/{id}', [ 'as' => 'admin.stock.update', 'uses' => 'AdminController@update_stock']);
+		Route::get('admin/stock/delete/{id}', [ 'as' => 'admin.stock.delete', 'uses' => 'AdminController@delete_stock']);
 });
 
 
@@ -113,6 +118,13 @@ Route::group(['middleware' => 'provider'], function () {
 //Clients
 	Route::get('provider/users/client', [ 'as' => 'provider.client', 'uses' => 'AdminController@users_client']);
 	Route::get('provider/users/client/show/{id}', [ 'as' => 'provider.client.show', 'uses' => 'AdminController@show_client']);
+
+
+	//Sexdates
+		Route::get('provider/users/sexdate', [ 'as' => 'provider.sexdate', 'uses' => 'AdminController@sexdate']);
+		Route::get('provider/users/sexdate/create', [ 'as' => 'provider.sexdate.create', 'uses' => 'AdminController@sexdate_create']);
+		Route::post('provider/sexdate/create', [ 'as' => 'provider.sexdate.post', 'uses' => 'AdminController@create_sexdate']);
+		Route::get('provider/users/sexdate/show/{id}', [ 'as' => 'provider.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
 
 
 });

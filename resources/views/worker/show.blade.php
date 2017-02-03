@@ -44,8 +44,8 @@ margin: auto;
 
   <div class="row">
           <div class="col-xs-12">
-            @if (Auth::user()->role->name != "Worker")
-              <a href="{{route($routeGenerator->make('sexdate.create', auth()->user()))}}" class="btn btn-block btn-danger">Sexdate</a>
+            @if (Auth::user()->role->name == "Admin" OR Auth::user()->role->name == "Client")
+              <a href="{{route($routeGenerator->make('sexdate.create', auth()->user()))}}" class="btn btn-block btn-danger">New Sexdate</a>
             @endif
           </div>
   </div>
@@ -179,7 +179,7 @@ margin: auto;
                           </span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
-
+<br>
                 <div class="c-wrapper">
                   <div id="myCarousel" class="carousel slide" data-ride="carousel" style="display: inline-block; width:100%;">
                     <!-- Indicators -->
@@ -238,7 +238,7 @@ margin: auto;
                       </div>
                       @endif
                     </div>
-
+                  @if($user->worker->image1)
                     <!-- Left and right controls -->
                     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -248,6 +248,7 @@ margin: auto;
                       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                       <span class="sr-only">Next</span>
                     </a>
+                  @endif
                   </div>
                   </div>
 

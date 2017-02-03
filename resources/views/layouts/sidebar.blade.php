@@ -40,7 +40,12 @@
                     </li>
                     <li>
                     <a href="{{route($routeGenerator->make('sexdate', auth()->user()))}}">
-                        <i class="fa fa-child"></i> <span>SexDates</span>
+                        <i class="fa fa-calendar"></i> <span>SexDates</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="{{route($routeGenerator->make('stock', auth()->user()))}}">
+                        <i class="fa fa-archive"></i> <span>Stock</span>
                     </a>
                     </li>
 

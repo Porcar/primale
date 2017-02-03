@@ -75,8 +75,102 @@
                   </div>
                 </div>
 
+                @if($worker->monday_active == True)
                 <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Administration Date</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Monday</label>
+                  <div class="col-sm-2">
+                    <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="monday_active">
+                          </span>
+                      {!! Form::text('monday_hours', null , array('class' => 'form-control', 'placeholder'=>'Monday Hours...' ) ) !!}
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if($worker->tuesday_active== True)
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Tuesday</label>
+                  <div class="col-sm-2">
+                    <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="tuesday_active">
+                          </span>
+                      {!! Form::text('tuesday_hours', null , array('class' => 'form-control', 'placeholder'=>'Tuesday Hours...' ) ) !!}
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if($worker->wednesday_active == True)
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Wednesday</label>
+                  <div class="col-sm-2">
+                    <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="wednesday_active">
+                          </span>
+                      {!! Form::text('wednesday_hours', null , array('class' => 'form-control', 'placeholder'=>'Wednesday Hours...' ) ) !!}
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if($worker->thursday_active == True)
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Thursday</label>
+                  <div class="col-sm-2">
+                    <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="thursday_active">
+                          </span>
+                      {!! Form::text('thursday_hours', null , array('class' => 'form-control', 'placeholder'=>'Thursday Hours...' ) ) !!}
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if($worker->friday_active == True)
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Friday</label>
+                  <div class="col-sm-2">
+                    <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="friday_active">
+                          </span>
+                      {!! Form::text('friday_hours', null , array('class' => 'form-control', 'placeholder'=>'Friday Hours...' ) ) !!}
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if($worker->saturday_active == True)
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Saturday</label>
+                  <div class="col-sm-2">
+                    <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="saturday_active">
+                          </span>
+                      {!! Form::text('saturday_hours', null , array('class' => 'form-control', 'placeholder'=>'Saturday Hours...' ) ) !!}
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if($worker->sunday_active == True)
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Sunday</label>
+                  <div class="col-sm-2">
+                    <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="sunday_active">
+                          </span>
+                      {!! Form::text('sunday_hours', null , array('class' => 'form-control', 'placeholder'=>'Sunday Hours...' ) ) !!}
+                    </div>
+                  </div>
+                </div>
+              @endif
+
+
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Date</label>
                   <div class ="col-sm-10">
                   {!! Form::date('date', \Carbon\Carbon::now(), array('class' => 'form-control', 'placeholder'=>'Date...' ) ) !!}
                   </div>

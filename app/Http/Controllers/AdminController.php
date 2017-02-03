@@ -14,6 +14,7 @@ use App\Client;
 use App\Sexdate;
 use App\Stock;
 use App\Role;
+use App\Tag;
 use App\Services\RouteGeneratorService;
 
 
@@ -560,30 +561,6 @@ class AdminController extends Controller
             return redirect()->route('admin.sexdate');
         }
 
-        public function edit_sexdate($id)
-        {
-            $user = User::find($id);
-
-            return view("sexdate.edit")->with(compact('user'));
-        }
-
-        public function update_sexdate(Request $request, $id, RouteGeneratorService $routeGenerator)
-        {
-
-
-
-            $sexdate = Sexdate::find($id);
-            $sexdate->date = $request->input('date');
-            $sexdate->status = $request->input('status');
-            $sexdate->hours = $request->input('hours');
-            $sexdate->observation = $request->input('observation');
-            $sexdate->save();
-
-
-            return redirect()->route($routeGenerator->make('sexdate', auth()->user()));
-        }
-
-
 
           public function show_sexdate($id)
             {
@@ -596,5 +573,99 @@ class AdminController extends Controller
               $sexdate = Sexdate::all();
               return view('sexdate.sexdate_list')->with(compact('sexdate'));
             }
+
+            public function delete_sexdate($id, RouteGeneratorService $routeGenerator)
+            {
+                $sexdate = Sexdate::find($id);
+                $sexdate->delete();
+
+                return redirect()->route('admin.sexdate');
+                //return redirect()->route('admin.group.show',$id);
+            }
+
+            public function stock()
+            {
+                $stocks = Stock::all();
+                return view('stock.stock_list')->with(compact('stocks'));
+            }
+
+            public function stock_create()
+            {
+                return view("stock.create");
+            }
+
+            public function create_stock(Request $request, RouteGeneratorService $routeGenerator)
+            {
+                //
+                $messages = [];
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'description' => 'required',
+                    'quantity' => 'required',
+                    'price' => 'required',
+                ],$messages);
+
+                if ($validator->fails()) {
+                    return redirect('admin/stock/create')->withErrors($validator)->withInput();
+                }
+
+                #create Stock
+                $stock = new Stock();
+                $stock->name = $request->input('name');
+                $stock->description = $request->input('description');
+                $stock->quantity = $request->input('quantity');
+                $stock->price = $request->input('price');
+                $stock->points = $request->input('points');
+                $stock->save();
+
+
+                return redirect()->route($routeGenerator->make('stock', auth()->user()));
+
+            }
+
+            public function edit_stock($id)
+            {
+                $stock = Stock::find($id);
+                return view("stock.edit")->with(compact('stock'));
+            }
+
+            public function update_stock(Request $request, $id, RouteGeneratorService $routeGenerator)
+            {
+                //
+                $messages = [];
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'description' => 'required',
+                    'quantity' => 'required',
+                    'price' => 'required',
+                ],$messages);
+
+                if ($validator->fails()) {
+                    return redirect()->route('admin.stock');
+                }
+
+                #create Unit
+                $stock = Stock::find($id);
+                $stock->name = $request->input('name');
+                $stock->description = $request->input('description');
+                $stock->quantity = $request->input('quantity');
+                $stock->price = $request->input('price');
+                $stock->points = $request->input('points');
+                $stock->save();
+
+
+
+                return redirect()->route($routeGenerator->make('stock', auth()->user()));
+                //return redirect()->route('admin.stock');
+            }
+
+            public function delete_stock($id, RouteGeneratorService $routeGenerator)
+            {
+                $stock = Stock::find($id);
+                $stock->delete();
+
+                return redirect()->route($routeGenerator->make('stock', auth()->user()));
+            }
+
 
 }
