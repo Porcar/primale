@@ -57,24 +57,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($clients as $client)
                             <tr>
-                            <td><a href="{{route($routeGenerator->make('client.show', auth()->user()), $user->id)}}">{{$user->name}}</a></td>
-                            <td><a href="{{route($routeGenerator->make('client.show', auth()->user()), $user->id)}}">{{$user->lastname}}</td>
-                            <td>{{$user->email}}</td>
+                            <td><a href="{{route($routeGenerator->make('client.show', auth()->user()), $client->id)}}">{{$client->user->name}}</a></td>
+                            <td><a href="{{route($routeGenerator->make('client.show', auth()->user()), $client->id)}}">{{$client->user->lastname}}</td>
+                            <td>{{$client->user->email}}</td>
                             <td>
-                              @if($user->client->sex == 0)
+                              @if($client->sex == 0)
                                 Male
                               @else
                                 Female
                               @endif
                             </td>
-                            <td>{{$user->client->age}}</td>
+                            <td>{{$client->age}}</td>
                             @if (Auth::user()->role->name == "Admin")
 							              <td>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <a href="{{route($routeGenerator->make('client.edit', auth()->user()), $user->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
+                                        <a href="{{route($routeGenerator->make('client.edit', auth()->user()), $client->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
                                     </div>
                                 </div>
                             </td>

@@ -23,69 +23,57 @@
       <div class="box box-widget widget-user">
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div class="widget-user-header bg-red-active">
-              <h3 class="widget-user-username">{{$user->name}} {{$user->lastname}}</h3>
+              <h3 class="widget-user-username">{{$provider->user->name}} {{$provider->user->lastname}}</h3>
               <h5 class="widget-user-desc">Provider</h5>
           </div>
           <div class="widget-user-image">
-              <img class="img-circle" src="{{url($user->image)}}" alt="User Avatar">
+              <img class="img-circle" src="{{url($provider->user->image)}}" alt="User Avatar">
           </div>
           <div class="box-footer">
               <div class="row">
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Name</h5>
-                          <span class="description-text">{{$user->name}}</span>
+                          <span class="description-text">{{$provider->user->name}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Lastname</h5>
-                          <span class="description-text">{{$user->lastname}}</span>
+                          <span class="description-text">{{$provider->user->lastname}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Email</h5>
-                          <span class="description-text">{{$user->email}}</span>
+                          <span class="description-text">{{$provider->user->email}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Username</h5>
-                          <span class="description-text">{{$user->username}}</span>
+                          <span class="description-text">{{$provider->user->username}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Credential</h5>
-                          <span class="description-text">{{$user->credential}}</span>
+                          <span class="description-text">{{$provider->user->credential}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Phone</h5>
-                          <span class="description-text">{{$user->phone}}</span>
+                          <span class="description-text">{{$provider->user->phone}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Address</h5>
-                          <span class="description-text">{{$user->address}}</span>
+                          <span class="description-text">{{$provider->user->address}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
 
-                  <div class="col-xs-12">
-                      <div class="description-block">
-                          <h5 class="description-header">Status</h5>
-                          <span class="description-text">
-                              @if($user->active==1)
-                              Active
-                              @else
-                              Deactive
-                              @endif
-                          </span>
-                      </div><!-- /.description-block -->
-                  </div><!-- /.col -->
               </div><!-- /.row -->
           </div>
       </div><!-- /.widget-user -->
@@ -96,7 +84,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">List of Workers</h3>
+                <h3 class="box-title">List of my Workers</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <table id="" class="table asc table-bordered table-striped">
@@ -107,6 +95,7 @@
                             <th>Lastname</th>
                             <th>Email</th>
                             <th>Sex</th>
+                            <th>Tags</th>
                             <th>Age</th>
                             <th>Price / Hour</th>
                             @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
@@ -117,8 +106,8 @@
                     <tbody>
                         @foreach ($workers as $worker)
                             <tr>
-                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $user->id)}}">{{$worker->user->name}}</a></td>
-                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $user->id)}}">{{$worker->user->lastname}}</td>
+                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $worker->id)}}">{{$worker->user->name}}</a></td>
+                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $worker->id)}}">{{$worker->user->lastname}}</td>
                             <td>{{$worker->user->email}}</td>
                             <td>
                               @if($worker->sex == 0)
@@ -127,13 +116,18 @@
                                 Female
                               @endif
                             </td>
+                            <td>
+                              @foreach($worker->tags as $tag)
+                                | {{$tag->name}} |
+                              @endforeach
+                            </td>
                             <td>{{$worker->age}}</td>
                             <td>{{$worker->price}} $</td>
                             @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
 							              <td>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <a href="{{route($routeGenerator->make('worker.edit', auth()->user()), $user->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
+                                        <a href="{{route($routeGenerator->make('worker.edit', auth()->user()), $worker->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
                                     </div>
                                 </div>
                             </td>
@@ -148,6 +142,7 @@
                             <th>Lastname</th>
                             <th>Email</th>
                             <th>Sex</th>
+                            <th>Tags</th>
                             <th>Age</th>
                             <th>Price</th>
                             @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")

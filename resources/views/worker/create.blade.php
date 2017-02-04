@@ -97,13 +97,13 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Age</label>
                   <div class="col-sm-10">
-                  {!! Form::text('age', null, array('class' => 'form-control', 'placeholder'=>'Age...', 'required'=> 'True') ) !!}
+                  {!! Form::number('age', null, array('class' => 'form-control', 'placeholder'=>'Age...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Price Per Hour</label>
                   <div class="col-sm-10">
-                  {!! Form::text('price', null , array('class' => 'form-control', 'placeholder'=>'Price...' ) ) !!}
+                  {!! Form::number('price', null , array('class' => 'form-control', 'placeholder'=>'Price...' ) ) !!}
                   </div>
                 </div>
 
@@ -132,7 +132,7 @@
                           <span class="input-group-addon">
                             <input type="checkbox" name="monday_active">
                           </span>
-                      {!! Form::text('monday_hours', null , array('class' => 'form-control', 'placeholder'=>'Monday Hours...' ) ) !!}
+                      {!! Form::number('monday_hours', null , array('class' => 'form-control', 'placeholder'=>'Monday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -143,7 +143,7 @@
                           <span class="input-group-addon">
                             <input type="checkbox" name="tuesday_active">
                           </span>
-                      {!! Form::text('tuesday_hours', null , array('class' => 'form-control', 'placeholder'=>'Tuesday Hours...' ) ) !!}
+                      {!! Form::number('tuesday_hours', null , array('class' => 'form-control', 'placeholder'=>'Tuesday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -154,7 +154,7 @@
                           <span class="input-group-addon">
                             <input type="checkbox" name="wednesday_active">
                           </span>
-                      {!! Form::text('wednesday_hours', null , array('class' => 'form-control', 'placeholder'=>'Wednesday Hours...' ) ) !!}
+                      {!! Form::number('wednesday_hours', null , array('class' => 'form-control', 'placeholder'=>'Wednesday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -165,7 +165,7 @@
                           <span class="input-group-addon">
                             <input type="checkbox" name="thursday_active">
                           </span>
-                      {!! Form::text('thursday_hours', null , array('class' => 'form-control', 'placeholder'=>'Thursday Hours...' ) ) !!}
+                      {!! Form::number('thursday_hours', null , array('class' => 'form-control', 'placeholder'=>'Thursday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -176,7 +176,7 @@
                           <span class="input-group-addon">
                             <input type="checkbox" name="friday_active">
                           </span>
-                      {!! Form::text('friday_hours', null , array('class' => 'form-control', 'placeholder'=>'Friday Hours...' ) ) !!}
+                      {!! Form::number('friday_hours', null , array('class' => 'form-control', 'placeholder'=>'Friday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -187,7 +187,7 @@
                           <span class="input-group-addon">
                             <input type="checkbox" name="saturday_active">
                           </span>
-                      {!! Form::text('saturday_hours', null , array('class' => 'form-control', 'placeholder'=>'Saturday Hours...' ) ) !!}
+                      {!! Form::number('saturday_hours', null , array('class' => 'form-control', 'placeholder'=>'Saturday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -198,9 +198,24 @@
                           <span class="input-group-addon">
                             <input type="checkbox" name="sunday_active">
                           </span>
-                      {!! Form::text('sunday_hours', null , array('class' => 'form-control', 'placeholder'=>'Sunday Hours...' ) ) !!}
+                      {!! Form::number('sunday_hours', null , array('class' => 'form-control', 'placeholder'=>'Sunday Hours...' ) ) !!}
                     </div>
                   </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Tags</label>
+                    <div class="col-sm-10">
+                        @foreach ($tags as $tag)
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="tag_{{$tag->id}}">
+                                {{$tag->name}}
+                              </label>
+                        </div>
+                        @endforeach
+                    </div>
+
                 </div>
 
 

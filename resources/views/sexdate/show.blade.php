@@ -57,13 +57,13 @@
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Date</h5>
-                          <span class="description-text">{{$sexdate->date}}</span>
+                          <span class="description-text">{{$sexdate->day}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Clients Phone</h5>
-                          <span class="description-text">{{$sexdate->client->phone}}</span>
+                          <span class="description-text">{{$sexdate->client->user->phone}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">

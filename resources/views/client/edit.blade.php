@@ -43,43 +43,43 @@
               <h3 class="box-title">Edit Client</h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-          {!! Form::model($user, array('route' => array($routeGenerator->make('client.update', auth()->user()), $user->id),'method' => 'put',  'id'=>'form_event','class'=>'form-horizontal') ) !!}
+          {!! Form::model($client, array('route' => array($routeGenerator->make('client.update', auth()->user()), $client->id),'method' => 'put',  'id'=>'form_event','class'=>'form-horizontal') ) !!}
               <div class="box-body">
 
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
                   <div class="col-sm-10">
-                    {!! Form::text('name', null, array('class' => 'form-control', 'placeholder'=>'Name...', 'required'=> 'True') ) !!}
+                    {!! Form::text('name', $client->user->name, array('class' => 'form-control', 'placeholder'=>'Name...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Lastname</label>
                   <div class="col-sm-10">
-                  {!! Form::text('lastname', null, array('class' => 'form-control', 'placeholder'=>'Lastname...', 'required'=> 'True') ) !!}
+                  {!! Form::text('lastname', $client->user->lastname, array('class' => 'form-control', 'placeholder'=>'Lastname...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Credential</label>
                   <div class="col-sm-10">
-                  {!! Form::text('credential', null, array('class' => 'form-control', 'placeholder'=>'Credential...', 'required'=> 'True') ) !!}
+                  {!! Form::text('credential', $client->user->credential, array('class' => 'form-control', 'placeholder'=>'Credential...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Phone</label>
                   <div class="col-sm-10">
-                  {!! Form::text('phone', null, array('class' => 'form-control', 'placeholder'=>'Phone...', 'required'=> 'True') ) !!}
+                  {!! Form::text('phone', $client->user->phone, array('class' => 'form-control', 'placeholder'=>'Phone...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Address</label>
                   <div class="col-sm-10">
-                  {!! Form::text('address', null, array('class' => 'form-control', 'placeholder'=>'Address...', 'required'=> 'True') ) !!}
+                  {!! Form::text('address', $client->user->address, array('class' => 'form-control', 'placeholder'=>'Address...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Age</label>
                   <div class="col-sm-10">
-                  {!! Form::text('age', $user->client->age, array('class' => 'form-control', 'placeholder'=>'Age...' ) ) !!}
+                  {!! Form::number('age', null, array('class' => 'form-control', 'placeholder'=>'Age...' ) ) !!}
                   </div>
                 </div>
 
@@ -88,13 +88,13 @@
                   <div class="col-sm-10">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="sex" id="optionsRadios1" value="True" @if ($user->client->sex==True) checked @endif>
+                            <input type="radio" name="sex" id="optionsRadios1" value="True" @if ($client->sex==True) checked @endif>
                             Female
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="sex" id="optionsRadios2" value="False" @if ($user->client->sex==False) checked @endif>
+                            <input type="radio" name="sex" id="optionsRadios2" value="False" @if ($client->sex==False) checked @endif>
                             Male
                         </label>
                     </div>

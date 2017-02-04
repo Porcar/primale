@@ -74,9 +74,9 @@ Route::group(['middleware' => 'admin'], function () {
 
 	//Sexdates
 		Route::get('admin/users/sexdate', [ 'as' => 'admin.sexdate', 'uses' => 'AdminController@sexdate']);
-		Route::get('admin/users/sexdate/create', [ 'as' => 'admin.sexdate.create', 'uses' => 'AdminController@sexdate_create']);
 		Route::post('admin/sexdate/create', [ 'as' => 'admin.sexdate.post', 'uses' => 'AdminController@create_sexdate']);
 		Route::get('admin/users/sexdate/show/{id}', [ 'as' => 'admin.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
+		Route::get('admin/users/sexdate/createwithclient/{id}', [ 'as' => 'admin.sexdate.createwithclient', 'uses' => 'AdminController@createwithclient']);
 		Route::get('admin/sexdate/delete/{id}', [ 'as' => 'admin.sexdate.delete', 'uses' => 'AdminController@delete_sexdate']);
 
 		//stock
@@ -86,6 +86,14 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('admin/stock/edit/{id}', [ 'as' => 'admin.stock.edit', 'uses' => 'AdminController@edit_stock']);
 		Route::put('admin/stock/update/{id}', [ 'as' => 'admin.stock.update', 'uses' => 'AdminController@update_stock']);
 		Route::get('admin/stock/delete/{id}', [ 'as' => 'admin.stock.delete', 'uses' => 'AdminController@delete_stock']);
+
+		//Tags
+		Route::get('admin/tag', [ 'as' => 'admin.tag', 'uses' => 'AdminController@tag']);
+		Route::get('admin/tag/create', [ 'as' => 'admin.tag.create', 'uses' => 'AdminController@tag_create']);
+		Route::post('admin/tag/create', [ 'as' => 'admin.tag.post', 'uses' => 'AdminController@create_tag']);
+		Route::get('admin/tag/edit/{id}', [ 'as' => 'admin.tag.edit', 'uses' => 'AdminController@edit_tag']);
+		Route::put('admin/tag/update/{id}', [ 'as' => 'admin.tag.update', 'uses' => 'AdminController@update_tag']);
+		Route::get('admin/tag/delete/{id}', [ 'as' => 'admin.tag.delete', 'uses' => 'AdminController@delete_tag']);
 });
 
 
@@ -100,31 +108,30 @@ Route::group(['middleware' => 'provider'], function () {
 	Route::put('provider/password/{admin}', [ 'as' => 'provider.update.password', 'uses' => 'AdminController@update_password']);
 
 
-//Providers
-	Route::get('provider/users/provider', [ 'as' => 'provider.provider', 'uses' => 'AdminController@users_provider']);
-	Route::get('provider/users/provider/show/{id}', [ 'as' => 'provider.provider.show', 'uses' => 'AdminController@show_provider']);
+	//Providers
+		Route::get('provider/users/provider', [ 'as' => 'provider.provider', 'uses' => 'AdminController@users_provider']);
+		Route::get('provider/users/provider/show/{id}', [ 'as' => 'provider.provider.show', 'uses' => 'AdminController@show_provider']);
 
 
-//Workers
-	Route::get('provider/users/worker', [ 'as' => 'provider.worker', 'uses' => 'AdminController@users_worker']);
-	Route::get('provider/users/worker/create', [ 'as' => 'provider.worker.create', 'uses' => 'AdminController@users_worker_create']);
-	Route::post('provider/worker/create', [ 'as' => 'provider.worker.post', 'uses' => 'AdminController@create_worker_user']);
-	Route::get('provider/users/worker/show/{id}', [ 'as' => 'provider.worker.show', 'uses' => 'AdminController@show_worker']);
-	Route::get('provider/users/worker/edit/{id}', [ 'as' => 'provider.worker.edit', 'uses' => 'AdminController@edit_worker']);
-	Route::put('provider/users/worker/update/{id}', [ 'as' => 'provider.worker.update', 'uses' => 'AdminController@update_worker']);
+	//Workers
+		Route::get('provider/users/worker', [ 'as' => 'provider.worker', 'uses' => 'AdminController@users_worker']);
+		Route::get('provider/users/worker/create', [ 'as' => 'provider.worker.create', 'uses' => 'AdminController@users_worker_create']);
+		Route::post('provider/worker/create', [ 'as' => 'provider.worker.post', 'uses' => 'AdminController@create_worker_user']);
+		Route::get('provider/users/worker/show/{id}', [ 'as' => 'provider.worker.show', 'uses' => 'AdminController@show_worker']);
+		Route::get('provider/users/worker/edit/{id}', [ 'as' => 'provider.worker.edit', 'uses' => 'AdminController@edit_worker']);
+		Route::put('provider/users/worker/update/{id}', [ 'as' => 'provider.worker.update', 'uses' => 'AdminController@update_worker']);
 
 
 
-//Clients
-	Route::get('provider/users/client', [ 'as' => 'provider.client', 'uses' => 'AdminController@users_client']);
-	Route::get('provider/users/client/show/{id}', [ 'as' => 'provider.client.show', 'uses' => 'AdminController@show_client']);
+	//Clients
+		Route::get('provider/users/client/show/{id}', [ 'as' => 'provider.client.show', 'uses' => 'AdminController@show_client']);
 
 
-	//Sexdates
-		Route::get('provider/users/sexdate', [ 'as' => 'provider.sexdate', 'uses' => 'AdminController@sexdate']);
-		Route::get('provider/users/sexdate/create', [ 'as' => 'provider.sexdate.create', 'uses' => 'AdminController@sexdate_create']);
-		Route::post('provider/sexdate/create', [ 'as' => 'provider.sexdate.post', 'uses' => 'AdminController@create_sexdate']);
-		Route::get('provider/users/sexdate/show/{id}', [ 'as' => 'provider.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
+
+		//Sexdates
+			Route::get('provider/users/sexdate', [ 'as' => 'provider.sexdate', 'uses' => 'AdminController@sexdate']);
+			Route::get('provider/users/sexdate/show/{id}', [ 'as' => 'provider.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
+			Route::get('provider/sexdate/delete/{id}', [ 'as' => 'provider.sexdate.delete', 'uses' => 'AdminController@delete_sexdate']);
 
 
 });
@@ -140,20 +147,24 @@ Route::group(['middleware' => 'worker'], function () {
 	Route::put('worker/password/{admin}', [ 'as' => 'worker.update.password', 'uses' => 'AdminController@update_password']);
 
 
-//Providers
-	Route::get('worker/users/provider', [ 'as' => 'worker.provider', 'uses' => 'AdminController@users_provider']);
-	Route::get('worker/users/provider/show/{id}', [ 'as' => 'worker.provider.show', 'uses' => 'AdminController@show_provider']);
+	//Providers
+		Route::get('worker/users/provider', [ 'as' => 'worker.provider', 'uses' => 'AdminController@users_provider']);
+		Route::get('worker/users/provider/show/{id}', [ 'as' => 'worker.provider.show', 'uses' => 'AdminController@show_provider']);
 
 
-//Workers
-	Route::get('worker/users/worker', [ 'as' => 'worker.worker', 'uses' => 'AdminController@users_worker']);
-	Route::get('worker/users/worker/show/{id}', [ 'as' => 'worker.worker.show', 'uses' => 'AdminController@show_worker']);
+	//Workers
+		Route::get('worker/users/worker', [ 'as' => 'worker.worker', 'uses' => 'AdminController@users_worker']);
+		Route::get('worker/users/worker/show/{id}', [ 'as' => 'worker.worker.show', 'uses' => 'AdminController@show_worker']);
 
 
+	//Clients
+		Route::get('worker/users/client/show/{id}', [ 'as' => 'worker.client.show', 'uses' => 'AdminController@show_client']);
 
-//Clients
-	Route::get('worker/users/client', [ 'as' => 'worker.client', 'uses' => 'AdminController@users_client']);
-	Route::get('worker/users/client/show/{id}', [ 'as' => 'worker.client.show', 'uses' => 'AdminController@show_client']);
+
+		//Sexdates
+			Route::get('worker/users/sexdate', [ 'as' => 'worker.sexdate', 'uses' => 'AdminController@sexdate']);
+			Route::get('worker/users/sexdate/show/{id}', [ 'as' => 'worker.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
+			Route::get('worker/sexdate/delete/{id}', [ 'as' => 'worker.sexdate.delete', 'uses' => 'AdminController@delete_sexdate']);
 
 
 });
@@ -169,20 +180,17 @@ Route::group(['middleware' => 'client'], function () {
 	Route::put('client/password/{admin}', [ 'as' => 'client.update.password', 'uses' => 'AdminController@update_password']);
 
 
-//Providers
-	Route::get('client/users/provider', [ 'as' => 'client.provider', 'uses' => 'AdminController@users_provider']);
-	Route::get('client/users/provider/show/{id}', [ 'as' => 'client.provider.show', 'uses' => 'AdminController@show_provider']);
+
+	//Workers
+		Route::get('client/users/worker', [ 'as' => 'client.worker', 'uses' => 'AdminController@users_worker']);
+		Route::get('client/users/worker/show/{id}', [ 'as' => 'client.worker.show', 'uses' => 'AdminController@show_worker']);
 
 
-//Workers
-	Route::get('client/users/worker', [ 'as' => 'client.worker', 'uses' => 'AdminController@users_worker']);
-	Route::get('client/users/worker/show/{id}', [ 'as' => 'client.worker.show', 'uses' => 'AdminController@show_worker']);
-
-
-
-//Clients
-	Route::get('client/users/client', [ 'as' => 'client.client', 'uses' => 'AdminController@users_client']);
-	Route::get('client/users/client/show/{id}', [ 'as' => 'client.client.show', 'uses' => 'AdminController@show_client']);
-
+		//Sexdates
+			Route::get('client/users/sexdate', [ 'as' => 'client.sexdate', 'uses' => 'AdminController@sexdate']);
+			Route::post('client/sexdate/create', [ 'as' => 'client.sexdate.post', 'uses' => 'AdminController@create_sexdate']);
+			Route::get('client/users/sexdate/show/{id}', [ 'as' => 'client.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
+			Route::get('client/users/sexdate/createwithclient/{id}', [ 'as' => 'client.sexdate.createwithclient', 'uses' => 'AdminController@createwithclient']);
+			Route::get('client/sexdate/delete/{id}', [ 'as' => 'client.sexdate.delete', 'uses' => 'AdminController@delete_sexdate']);
 
 });

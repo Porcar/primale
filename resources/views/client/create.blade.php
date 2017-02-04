@@ -91,7 +91,7 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Age</label>
                   <div class="col-sm-10">
-                  {!! Form::text('age', null, array('class' => 'form-control', 'placeholder'=>'Age...', 'required'=> 'True') ) !!}
+                  {!! Form::number('age', null, array('class' => 'form-control', 'placeholder'=>'Age...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
 

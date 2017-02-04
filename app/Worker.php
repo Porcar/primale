@@ -19,12 +19,10 @@ class Worker extends Model
   {
       return $this->belongsTo('App\Provider');
   }
-
   public function tags()
-    {
-        return $this->belongsToMany('App\Tag');
-    }
-
+  {
+      return $this->belongsToMany('App\Tag');
+  }
   public function sexdates()
   {
       return $this->hasMany('App\Sexdate');

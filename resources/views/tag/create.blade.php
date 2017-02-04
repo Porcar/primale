@@ -54,35 +54,6 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Description</label>
-                  <div class="col-sm-10">
-                    {!! Form::text('description', null, array('class' => 'form-control', 'placeholder'=>'Description...', 'required'=> 'True') ) !!}
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Quantity</label>
-                  <div class="col-sm-10">
-                    {!! Form::number('quantity', null, array('class' => 'form-control', 'placeholder'=>'Quantity...', 'required'=> 'True', 'min'=>'0', 'max'=>'2000') ) !!}
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Price</label>
-                  <div class="col-sm-10">
-                    {!! Form::number('price', null, array('class' => 'form-control', 'placeholder'=>'Price...', 'required'=> 'True', 'step'=>'0.01') ) !!}
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Points</label>
-                  <div class="col-sm-10">
-                    {!! Form::number('points', null, array('class' => 'form-control', 'placeholder'=>'Points...', 'required'=> 'True', 'step'=>'0.01') ) !!}
-                  </div>
-                </div>
-
-
               </div><!-- /.box-body -->
               <div class="box-footer">
                 <a href="{{ url()->previous() }}" class="btn btn-default">Cancel</a>

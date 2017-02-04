@@ -1,18 +1,17 @@
-
 @extends('layouts.baseadmin')
 @inject('routeGenerator', 'App\Services\RouteGeneratorService')
 @section('page')
-    Sexdate
+    Workers
 @endsection
 
 @section('title')
-    Sexdate Test
-    <small>Create New Sexdate</small>
+  Worker
+  <small>New</small>
 @endsection
 
 @section('level')
     <li><a href="{{ url()->previous() }}"><i class="fa fa-reply"></i>Go Back</a></li>
-    <li class="active">Create Sexdate</li>
+    <li class="active">Create Worker</li>
 @endsection
 
 @section('content')
@@ -41,41 +40,91 @@
         @endif
         <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Create Sexdate</h3>
+              <h3 class="box-title">Create New Worker</h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-              {!! Form::open(array('route' => $routeGenerator->make('sexdate.post', auth()->user()), 'id'=>'form_semester', 'class'=> 'form-horizontal' )) !!}
-
+            {!! Form::open(array('route' => $routeGenerator->make('worker.post', auth()->user()), 'id'=>'form_semester', 'class'=> 'form-horizontal' )) !!}
               <div class="box-body">
 
                 <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Observation</label>
+                  <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
                   <div class="col-sm-10">
-                    {!! Form::text('observation', null, array('class' => 'form-control', 'placeholder'=>'Observation...') ) !!}
+                    {!! Form::text('name', null, array('class' => 'form-control', 'placeholder'=>'Name...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
-
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Lastname</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('lastname', null, array('class' => 'form-control', 'placeholder'=>'Lastname...', 'required'=> 'True') ) !!}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                  <div class="col-sm-10">
+                    {!! Form::email('email', null, array('class' => 'form-control', 'placeholder'=>'Email...', 'required'=> 'True') ) !!}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Username</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('username', null, array('class' => 'form-control', 'placeholder'=>'Username...', 'required'=> 'True') ) !!}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Credential</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('credential', null, array('class' => 'form-control', 'placeholder'=>'Credential...', 'required'=> 'True') ) !!}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Phone</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('phone', null, array('class' => 'form-control', 'placeholder'=>'Phone...', 'required'=> 'True') ) !!}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Address</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('address', null, array('class' => 'form-control', 'placeholder'=>'Address...', 'required'=> 'True') ) !!}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Description</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('description', null, array('class' => 'form-control', 'placeholder'=>'Description...', 'required'=> 'True') ) !!}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Age</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('age', null, array('class' => 'form-control', 'placeholder'=>'Age...', 'required'=> 'True') ) !!}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Price Per Hour</label>
+                  <div class="col-sm-10">
+                  {!! Form::text('price', null , array('class' => 'form-control', 'placeholder'=>'Price...' ) ) !!}
+                  </div>
+                </div>
 
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Hours</label>
+                  <label for="inputPassword3" class="col-sm-2 control-label">Sex</label>
                   <div class="col-sm-10">
-                    {!! Form::number('hours', null, array('class' => 'form-control', 'placeholder'=>'Hours', 'required'=> 'True', 'min'=>'1', 'max'=>'23') ) !!}
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="sex" id="optionsRadios1" value="True" checked>
+                            Female
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="sex" id="optionsRadios2" value="False">
+                            Male
+                        </label>
+                    </div>
                   </div>
                 </div>
 
-
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Worker</label>
-                  <div class="col-sm-10">
-                      <select name="worker_id" class="form-control" required="">
-                        @foreach($workers as $worker)
-                          <option value="{{$worker->id}}">{{$worker->user->name}} {{$worker->user->lastname}}</option>
-                        @endforeach
-                      </select>
-                  </div>
-                </div>
-
-                @if($worker->monday_active == True)
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Monday</label>
                   <div class="col-sm-2">
@@ -87,8 +136,6 @@
                     </div>
                   </div>
                 </div>
-              @endif
-              @if($worker->tuesday_active== True)
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Tuesday</label>
                   <div class="col-sm-2">
@@ -100,8 +147,6 @@
                     </div>
                   </div>
                 </div>
-              @endif
-              @if($worker->wednesday_active == True)
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Wednesday</label>
                   <div class="col-sm-2">
@@ -113,8 +158,6 @@
                     </div>
                   </div>
                 </div>
-              @endif
-              @if($worker->thursday_active == True)
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Thursday</label>
                   <div class="col-sm-2">
@@ -126,8 +169,6 @@
                     </div>
                   </div>
                 </div>
-              @endif
-              @if($worker->friday_active == True)
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Friday</label>
                   <div class="col-sm-2">
@@ -139,8 +180,6 @@
                     </div>
                   </div>
                 </div>
-              @endif
-              @if($worker->saturday_active == True)
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Saturday</label>
                   <div class="col-sm-2">
@@ -152,8 +191,6 @@
                     </div>
                   </div>
                 </div>
-              @endif
-              @if($worker->sunday_active == True)
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Sunday</label>
                   <div class="col-sm-2">
@@ -163,16 +200,6 @@
                           </span>
                       {!! Form::text('sunday_hours', null , array('class' => 'form-control', 'placeholder'=>'Sunday Hours...' ) ) !!}
                     </div>
-                  </div>
-                </div>
-              @endif
-
-
-
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Date</label>
-                  <div class ="col-sm-10">
-                  {!! Form::date('date', \Carbon\Carbon::now(), array('class' => 'form-control', 'placeholder'=>'Date...' ) ) !!}
                   </div>
                 </div>
 
@@ -186,5 +213,6 @@
           </div><!-- /.box -->
     </div>
 </div>
+
 
 @endsection

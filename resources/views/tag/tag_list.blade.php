@@ -2,23 +2,23 @@
 @inject('routeGenerator', 'App\Services\RouteGeneratorService')
 @include('layouts.tables')
 @section('page')
-    Stock
+    Tags
 @endsection
 
 @section('title')
-    Stock
-    <small>Items List</small>
+    Tags
+    <small>Tags List</small>
 @endsection
 
 @section('level')
     <li><a href="{{ url()->previous() }}"><i class="fa fa-reply"></i>Go Back</a></li>
-    <li class="active">Items List</li>
+    <li class="active">Tags List</li>
 @endsection
 
 @section('content')
 <div class="row">
         <div class="col-xs-12">
-            <a href="{{route($routeGenerator->make('stock.create', auth()->user()))}}" class="btn btn-block btn-primary">New Item</a>
+            <a href="{{route($routeGenerator->make('tag.create', auth()->user()))}}" class="btn btn-block btn-primary">New Tags</a>
         </div>
 </div>
 <div class="row"  style="margin-top:10px;">
@@ -44,32 +44,25 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Points</th>
                             @if (Auth::user()->role->name == "Admin")
                             <th class="not-export-col">Actions</th>
                           @endif
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($stocks as $stock)
+                        @foreach ($tags as $tag)
 
                             <tr>
-                            <td>{{$stock->name}}</td>
-                            <td>{{$stock->description}}</td>
-                            <td>{{$stock->quantity}}</td>
-                            <td>{{$stock->price}}</td>
-                            <td>{{$stock->points}}</td>
+                            <td>{{$tag->name}}</td>
+
                             @if (Auth::user()->role->name == "Admin")
 							                       <td>
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <a href="{{route('admin.stock.edit',$stock->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
+                                        <a href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
                                     </div>
                                     <div class="col-xs-6">
-                                        <a href="{{route('admin.stock.delete',$stock->id)}}" class="btn btn-block btn-danger" data-toggle="confirmation">Delete</a>
+                                        <a href="{{route('admin.tag.delete',$tag->id)}}" class="btn btn-block btn-danger" data-toggle="confirmation">Delete</a>
                                     </div>
                                 </div>
                             </td>
@@ -81,10 +74,7 @@
                     <tfoot>
                         <tr>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Points</th>
+
                             @if (Auth::user()->role->name == "Admin")
                             <th class="not-export-col hidden">Actions</th>
                           @endif

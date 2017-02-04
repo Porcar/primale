@@ -12,22 +12,13 @@ class TagsTableSeeder extends Seeder
     public function run()
     {
       DB::table('tags')->insert([
-          'worker_id' => 1,
           'name' => 'Cosplayer',
-          'description' => 'Not much',
-          'active' => True,
       ]);
       DB::table('tags')->insert([
-          'worker_id' => 1,
           'name' => 'Superman',
-          'description' => 'likes to fly',
-          'active' => True,
       ]);
       DB::table('tags')->insert([
-          'worker_id' => 1,
           'name' => 'Thor',
-          'description' => 'Great Hammer',
-          'active' => True,
-      ]);    
+      ]);
     }
 }

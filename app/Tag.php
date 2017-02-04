@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-  public function worker()
+  public function workers()
   {
       return $this->belongsToMany('App\Worker');
   }

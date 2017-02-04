@@ -21,26 +21,40 @@
               </a>
             </li>
 
-                    <li class="header">My Bussiness</li>
-
+                    <li class="header">My Menu</li>
+@if (Auth::user()->role->name == "Admin")
                     <li>
                     <a href="{{route($routeGenerator->make('provider', auth()->user()))}}">
                         <i class="fa fa-users"></i> <span>Providers</span>
                     </a>
                     </li>
+@endif
+@if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider" || Auth::user()->role->name == "Client" )
+
                     <li>
                     <a href="{{route($routeGenerator->make('worker', auth()->user()))}}">
                         <i class="fa fa-money"></i> <span>Workers</span>
                     </a>
                     </li>
+@endif
+@if (Auth::user()->role->name == "Admin")
                     <li>
                     <a href="{{route($routeGenerator->make('client', auth()->user()))}}">
                         <i class="fa fa-child"></i> <span>Clients</span>
                     </a>
                     </li>
+@endif
+
                     <li>
                     <a href="{{route($routeGenerator->make('sexdate', auth()->user()))}}">
                         <i class="fa fa-calendar"></i> <span>SexDates</span>
+                    </a>
+                    </li>
+
+@if (Auth::user()->role->name == "Admin")
+                    <li>
+                    <a href="{{route($routeGenerator->make('tag', auth()->user()))}}">
+                        <i class="fa fa-commenting-o"></i> <span>Tags</span>
                     </a>
                     </li>
                     <li>
@@ -48,6 +62,7 @@
                         <i class="fa fa-archive"></i> <span>Stock</span>
                     </a>
                     </li>
+@endif
 
         </ul>
     </section>

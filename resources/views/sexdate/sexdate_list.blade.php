@@ -29,14 +29,6 @@
     </div>
 </div>
 
-<div class="row">
-        <div class="col-xs-12">
-          @if (Auth::user()->role->name == "Admin" OR Auth::user()->role->name == "Client")
-            <a href="{{route($routeGenerator->make('sexdate.create', auth()->user()))}}" class="btn btn-block btn-danger">New Sexdate</a>
-          @endif
-        </div>
-</div>
-
 <br>
 
 
@@ -51,22 +43,52 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Date</th>
-                            <th>Hour</th>
-                            <th>User</th>
-                            <th>Description</th>
+                            <th>Day</th>
+                            <th>Hours</th>
+                            <th>Worker</th>
+                            <th>Client</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($sexdate as $sexdate)
+                   @if(Auth::user()->role->name == "Provider")
+                      @foreach ($workers as $worker)
+                        @foreach ($worker->sexdates as $sexdate)
+
+
                         <tr>
                             <td><a href="{{route($routeGenerator->make('sexdate.show', auth()->user()), $sexdate->id)}}">{{$sexdate->id}}</td>
-                            <td>{{$sexdate->created_at->toFormattedDateString()}}</td>
-                            <td>{{$sexdate->created_at->toTimeString()}}</td>
-                            <td>{{$sexdate->worker->user->name}}</td>
-                            <td> {{$sexdate->observation}} </td>
+                            <td>{{$sexdate->day}}</td>
+                            <td>{{$sexdate->hours}}</td>
+                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $sexdate->worker->id)}}">{{$sexdate->worker->user->name}}</td>
+                            <td>
+                              <a href="{{route($routeGenerator->make('client.show', auth()->user()), $sexdate->client->id)}}">
+                                {{$sexdate->client->user->name}}
+                              </td>
                         </tr>
-                        @endforeach
+
+                            @endforeach
+                            @endforeach
+                          @else
+                              @foreach ($sexdates as $sexdate)
+
+
+                                <tr>
+                                  <td><a href="{{route($routeGenerator->make('sexdate.show', auth()->user()), $sexdate->id)}}">{{$sexdate->id}}</td>
+                                    <td>{{$sexdate->day}}</td>
+                                    <td>{{$sexdate->hours}}</td>
+                                    <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $sexdate->worker->id)}}">{{$sexdate->worker->user->name}}</td>
+
+                                      <td>
+                                        @if(Auth::user()->role->name != "Client")
+                                          <a href="{{route($routeGenerator->make('client.show', auth()->user()), $sexdate->client->id)}}">
+                                          @endif
+                                          {{$sexdate->client->user->name}}
+                                        </td>
+                                      </tr>
+
+                                    @endforeach
+                          @endif
+
                     </tbody>
                     <tfoot>
                         <tr>

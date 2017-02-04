@@ -23,6 +23,7 @@
           @endif
         </div>
 </div>
+
 <div class="row"  style="margin-top:10px;">
     <div class="col-xs-12">
         @if (Session::has('message'))
@@ -48,7 +49,7 @@
 
                             <th>Name</th>
                             <th>Lastname</th>
-                            <th>Email</th>
+                            <th>Tags</th>
                             <th>Sex</th>
                             <th>Age</th>
                             @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
@@ -57,24 +58,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($workers as $worker)
                             <tr>
-                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $user->id)}}">{{$user->name}}</a></td>
-                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $user->id)}}">{{$user->lastname}}</td>
-                            <td>{{$user->email}}</td>
+                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $worker->id)}}">{{$worker->user->name}}</a></td>
+                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $worker->id)}}">{{$worker->user->lastname}}</td>
                             <td>
-                              @if($user->worker->sex == 0)
+                              @foreach($worker->tags as $tag)
+                                | {{$tag->name}} |
+                              @endforeach
+                            </td>
+                            <td>
+                              @if($worker->sex == 0)
                                 Male
                               @else
                                 Female
                               @endif
                             </td>
-                            <td>{{$user->worker->age}}</td>
+                            <td>{{$worker->age}}</td>
                             @if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
 							              <td>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <a href="{{route($routeGenerator->make('worker.edit', auth()->user()), $user->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
+                                        <a href="{{route($routeGenerator->make('worker.edit', auth()->user()), $worker->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
                                     </div>
                                 </div>
                             </td>

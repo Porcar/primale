@@ -55,16 +55,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($providers as $provider)
                             <tr>
-                            <td><a href="{{route($routeGenerator->make('provider.show', auth()->user()), $user->id)}}">{{$user->name}}</a></td>
-                            <td><a href="{{route($routeGenerator->make('provider.show', auth()->user()), $user->id)}}">{{$user->lastname}}</td>
-                            <td>{{$user->email}}</td>
+                            <td><a href="{{route($routeGenerator->make('provider.show', auth()->user()), $provider->id)}}">{{$provider->user->name}}</a></td>
+                            <td><a href="{{route($routeGenerator->make('provider.show', auth()->user()), $provider->id)}}">{{$provider->user->lastname}}</td>
+                            <td>{{$provider->user->email}}</td>
                             @if (Auth::user()->role->name == "Admin")
 							              <td>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <a href="{{route($routeGenerator->make('provider.edit', auth()->user()), $user->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
+                                        <a href="{{route($routeGenerator->make('provider.edit', auth()->user()), $provider->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Edit</a>
                                     </div>
                                 </div>
                             </td>

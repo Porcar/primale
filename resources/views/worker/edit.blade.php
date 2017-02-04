@@ -43,55 +43,55 @@
               <h3 class="box-title">Edit Worker</h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-          {!! Form::model($user, array('route' => array($routeGenerator->make('worker.update', auth()->user()), $user->id),'method' => 'put',  'id'=>'form_event','class'=>'form-horizontal', 'files'=>true) ) !!}
+          {!! Form::model($worker, array('route' => array($routeGenerator->make('worker.update', auth()->user()), $worker->id),'method' => 'put',  'id'=>'form_event','class'=>'form-horizontal', 'files'=>true) ) !!}
               <div class="box-body">
 
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
                   <div class="col-sm-10">
-                    {!! Form::text('name', null, array('class' => 'form-control', 'placeholder'=>'Name...', 'required'=> 'True') ) !!}
+                    {!! Form::text('name', $worker->user->name, array('class' => 'form-control', 'placeholder'=>'Name...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Lastname</label>
                   <div class="col-sm-10">
-                  {!! Form::text('lastname', null, array('class' => 'form-control', 'placeholder'=>'Lastname...', 'required'=> 'True') ) !!}
+                  {!! Form::text('lastname', $worker->user->lastname, array('class' => 'form-control', 'placeholder'=>'Lastname...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Credential</label>
                   <div class="col-sm-10">
-                  {!! Form::text('credential', null, array('class' => 'form-control', 'placeholder'=>'Credential...', 'required'=> 'True') ) !!}
+                  {!! Form::text('credential', $worker->user->credential, array('class' => 'form-control', 'placeholder'=>'Credential...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Phone</label>
                   <div class="col-sm-10">
-                  {!! Form::text('phone', null, array('class' => 'form-control', 'placeholder'=>'Phone...', 'required'=> 'True') ) !!}
+                  {!! Form::text('phone', $worker->user->phone, array('class' => 'form-control', 'placeholder'=>'Phone...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Address</label>
                   <div class="col-sm-10">
-                  {!! Form::text('address', null, array('class' => 'form-control', 'placeholder'=>'Address...', 'required'=> 'True') ) !!}
+                  {!! Form::text('address', $worker->user->adress, array('class' => 'form-control', 'placeholder'=>'Address...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Description</label>
                   <div class="col-sm-10">
-                  {!! Form::text('description', $user->worker->description, array('class' => 'form-control', 'placeholder'=>'Description...' ) ) !!}
+                  {!! Form::text('description', null , array('class' => 'form-control', 'placeholder'=>'Description...' ) ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Age</label>
                   <div class="col-sm-10">
-                  {!! Form::text('age', $user->worker->age, array('class' => 'form-control', 'placeholder'=>'Age...' ) ) !!}
+                  {!! Form::number('age', null , array('class' => 'form-control', 'placeholder'=>'Age...' ) ) !!}
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Price Per Hour</label>
                   <div class="col-sm-10">
-                  {!! Form::text('price', $user->worker->price, array('class' => 'form-control', 'placeholder'=>'Price...' ) ) !!}
+                  {!! Form::number('price', null , array('class' => 'form-control', 'placeholder'=>'Price...' ) ) !!}
                   </div>
                 </div>
 
@@ -100,13 +100,13 @@
                   <div class="col-sm-10">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="sex" id="optionsRadios1" value="True" @if ($user->worker->sex==True) checked @endif>
+                            <input type="radio" name="sex" id="optionsRadios1" value="True" @if ($worker->sex==True) checked @endif>
                             Female
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="sex" id="optionsRadios2" value="False" @if ($user->worker->sex==False) checked @endif>
+                            <input type="radio" name="sex" id="optionsRadios2" value="False" @if ($worker->sex==False) checked @endif>
                             Male
                         </label>
                     </div>
@@ -119,13 +119,13 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                           <span class="input-group-addon">
-                            @if($user->worker->monday_active)
+                            @if($worker->monday_active)
                             <input type="checkbox" name="monday_active" checked>
                             @else
                             <input type="checkbox" name="monday_active">
                             @endif
                           </span>
-                      {!! Form::text('monday_hours', $user->worker->monday_hours, array('class' => 'form-control', 'placeholder'=>'Monday Hours...' ) ) !!}
+                      {!! Form::number('monday_hours', $worker->monday_hours, array('class' => 'form-control', 'placeholder'=>'Monday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -134,13 +134,13 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                           <span class="input-group-addon">
-                            @if($user->worker->tuesday_active)
+                            @if($worker->tuesday_active)
                             <input type="checkbox" name="tuesday_active" checked>
                             @else
                             <input type="checkbox" name="tuesday_active">
                             @endif
                           </span>
-                      {!! Form::text('tuesday_hours', $user->worker->tuesday_hours , array('class' => 'form-control', 'placeholder'=>'Tuesday Hours...' ) ) !!}
+                      {!! Form::number('tuesday_hours', $worker->tuesday_hours , array('class' => 'form-control', 'placeholder'=>'Tuesday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -149,13 +149,13 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                           <span class="input-group-addon">
-                            @if($user->worker->wednesday_active)
+                            @if($worker->wednesday_active)
                             <input type="checkbox" name="wednesday_active" checked>
                             @else
                             <input type="checkbox" name="wednesday_active">
                             @endif
                           </span>
-                      {!! Form::text('wednesday_hours', $user->worker->wednesday_hours , array('class' => 'form-control', 'placeholder'=>'Wednesday Hours...' ) ) !!}
+                      {!! Form::number('wednesday_hours', $worker->wednesday_hours , array('class' => 'form-control', 'placeholder'=>'Wednesday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -164,13 +164,13 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                           <span class="input-group-addon">
-                            @if($user->worker->thursday_active)
+                            @if($worker->thursday_active)
                               <input type="checkbox" name="thursday_active" checked>
                             @else
                               <input type="checkbox" name="thursday_active">
                             @endif
                           </span>
-                      {!! Form::text('thursday_hours', $user->worker->thursday_hours , array('class' => 'form-control', 'placeholder'=>'Thursday Hours...' ) ) !!}
+                      {!! Form::number('thursday_hours', $worker->thursday_hours , array('class' => 'form-control', 'placeholder'=>'Thursday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -179,13 +179,13 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                           <span class="input-group-addon">
-                            @if($user->worker->friday_active)
+                            @if($worker->friday_active)
                             <input type="checkbox" name="friday_active" checked>
                             @else
                             <input type="checkbox" name="friday_active">
                             @endif
                           </span>
-                      {!! Form::text('friday_hours', $user->worker->friday_hours , array('class' => 'form-control', 'placeholder'=>'Friday Hours...' ) ) !!}
+                      {!! Form::number('friday_hours', $worker->friday_hours , array('class' => 'form-control', 'placeholder'=>'Friday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -194,13 +194,13 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                           <span class="input-group-addon">
-                            @if($user->worker->saturday_active)
+                            @if($worker->saturday_active)
                               <input type="checkbox" name="saturday_active" checked>
                             @else
                               <input type="checkbox" name="saturday_active">
                             @endif
                           </span>
-                      {!! Form::text('saturday_hours', $user->worker->saturday_hours , array('class' => 'form-control', 'placeholder'=>'Saturday Hours...' ) ) !!}
+                      {!! Form::number('saturday_hours', $worker->saturday_hours , array('class' => 'form-control', 'placeholder'=>'Saturday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
@@ -209,16 +209,39 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                           <span class="input-group-addon">
-                            @if($user->worker->sunday_active)
+                            @if($worker->sunday_active)
                             <input type="checkbox" name="sunday_active" checked>
                             @else
                             <input type="checkbox" name="sunday_active">
                             @endif
                           </span>
-                      {!! Form::text('sunday_hours', $user->worker->sunday_hours , array('class' => 'form-control', 'placeholder'=>'Sunday Hours...' ) ) !!}
+                      {!! Form::number('sunday_hours', $worker->sunday_hours , array('class' => 'form-control', 'placeholder'=>'Sunday Hours...' ) ) !!}
                     </div>
                   </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Tags</label>
+                    <div class="col-sm-10">
+                        @foreach ($tags as $tag)
+                        <div class="checkbox">
+                            @if($worker->tags()->find($tag->id))
+                              <label>
+                                <input type="checkbox" name="tag_{{$tag->id}}" checked="">
+                                {{$tag->name}}
+                              </label>
+                            @else
+                              <label>
+                                <input type="checkbox" name="tag_{{$tag->id}}">
+                                {{$tag->name}}
+                              </label>
+                            @endif
+                        </div>
+                        @endforeach
+                    </div>
+
+                </div>
+
 
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">1st Picture</label>
@@ -271,7 +294,7 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Video</label>
                   <div class="col-sm-10">
-                  {!! Form::text('video', $user->worker->video, array('class' => 'form-control', 'placeholder'=>'Video URL' ) ) !!}
+                  {!! Form::text('video', $worker->video, array('class' => 'form-control', 'placeholder'=>'Video URL' ) ) !!}
                   </div>
                 </div>
 
