@@ -51,7 +51,8 @@
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Total Price</h5>
-                          <span class="description-text">{{($sexdate->hours)*($sexdate->worker->price)}}</span>
+                          <span class="description-text">{{$totalprice}}</span>
+
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
                   <div class="col-xs-12">
@@ -83,7 +84,7 @@
                           <h5 class="description-header">Tags</h5>
                           <span class="description-text">
                             @foreach($sexdate->tagsworkers as $tag)
-                              | {{$tag->name}} |
+                              | {{$tag->tag->name}} |
                             @endforeach
                             </span>
                       </div><!-- /.description-block -->

@@ -548,10 +548,11 @@ class AdminController extends Controller
             $sexdate->observation = $request->input('observation');
             $sexdate->save();
 
-            $worker = Worker::find($request->input('worker_id'));
-            foreach($worker->tagsworkers as $tagsw){
-              if($tagsw->id == $request->input('tag_'.$tagsw->id))
-                  $sexdate->tagsworkers()->attach($tagsw->id);
+
+            foreach($worker->tagsworkers as $tag){
+                if ($request->has('tag_'.$tag->id)) {
+                    $sexdate->tagsworkers()->attach($tag->id);
+                }
             }
 
 
@@ -590,8 +591,13 @@ class AdminController extends Controller
 
           public function show_sexdate($id)
             {
+                $addedprice = 0;
                 $sexdate = Sexdate::find($id);
-                return view("sexdate.show")->with(compact('sexdate'));
+                foreach ($sexdate->tagsworkers as $tag) {
+                $addedprice = $tag->price + $addedprice;
+                }
+                $totalprice = ($sexdate->hours * $addedprice);
+                return view("sexdate.show")->with(compact('sexdate', 'totalprice'));
             }
 
             public function createwithclient($id)
