@@ -11,14 +11,33 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
+
       DB::table('tags')->insert([
           'name' => 'Cosplayer',
+          'description' => 'Pikachu Cosplay',
+          'sessions' => 3,
+          'hours' => 2,
+          'experience' => True,
       ]);
       DB::table('tags')->insert([
-          'name' => 'Superman',
+        'name' => 'Super Sado',
+        'description' => '5000 shades of gray',
+        'sessions' => 1,
+        'hours' => 4,
+        'sado' => True,
       ]);
       DB::table('tags')->insert([
-          'name' => 'Thor',
+        'name' => 'Normal sex',
+        'description' => 'Abuelita Style',
+        'hours' => 6,
+        'normal' => True,
+      ]);
+      DB::table('tags')->insert([
+        'name' => 'Mixed sex',
+        'description' => 'Abuelita con burro Style',
+        'hours' => 2,
+        'normal' => True,
+        'sado' => True,
       ]);
     }
 }

@@ -135,36 +135,31 @@ margin: auto;
                           </span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
-                  <div class="col-xs-12">
-                      <div class="description-block">
-                          <h5 class="description-header">Manager</h5>
-                          <span class="description-text">{{$worker->provider->user->name}}</span>
-                      </div><!-- /.description-block -->
-                  </div><!-- /.col -->
+
                   <div class="col-xs-12">
                       <div class="description-block">
                           <h5 class="description-header">Working Days</h5>
                           <span class="description-text">
-                              @if($worker->monday_active==1)
-                                Monday : {{$worker->monday_hours}} Hours <br>
+                              @if($worker->schedule->monday_active==1)
+                                Monday : {{$worker->schedule->monday_hours}} Hours <br>
                               @endif
-                              @if ($worker->tuesday_active==1)
-                                Tuesday: {{$worker->tuesday_hours}} Hours <br>
+                              @if ($worker->schedule->tuesday_active==1)
+                                Tuesday: {{$worker->schedule->tuesday_hours}} Hours <br>
                               @endif
-                              @if ($worker->wednesday_active==1)
-                                Wednesday: {{$worker->wednesday_hours}} Hours <br>
+                              @if ($worker->schedule->wednesday_active==1)
+                                Wednesday: {{$worker->schedule->wednesday_hours}} Hours <br>
                               @endif
-                              @if ($worker->thursday_active==1)
-                                Thursday: {{$worker->thursday_hours}} Hours<br>
+                              @if ($worker->schedule->thursday_active==1)
+                                Thursday: {{$worker->schedule->thursday_hours}} Hours<br>
                               @endif
-                              @if ($worker->friday_active==1)
-                                Friday: {{$worker->friday_hours}} Hours<br>
+                              @if ($worker->schedule->friday_active==1)
+                                Friday: {{$worker->schedule->friday_hours}} Hours<br>
                               @endif
-                              @if ($worker->saturday_active==1)
-                                Saturday: {{$worker->saturday_hours}} Hours<br>
+                              @if ($worker->schedule->saturday_active==1)
+                                Saturday: {{$worker->schedule->saturday_hours}} Hours<br>
                               @endif
-                              @if ($worker->sunday_active==1)
-                                Sunday: {{$worker->sunday_hours}} Hours<br>
+                              @if ($worker->schedule->sunday_active==1)
+                                Sunday: {{$worker->schedule->sunday_hours}} Hours<br>
                               @endif
                           </span>
                       </div><!-- /.description-block -->
@@ -174,100 +169,91 @@ margin: auto;
                       <div class="description-block">
                           <h5 class="description-header">Tags</h5>
                           <span class="description-text">
-                            @foreach($worker->tags as $tag)
-                              |{{$tag->name}}|
+                            @foreach($worker->tagsworkers as $tag)
+                              |{{$tag->tag->name}}|
                             @endforeach
                             </span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
-
-
-<br>
-                <div class="c-wrapper">
-                  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="display: inline-block; width:100%;">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                      @if($worker->image1)
-                      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                      @endif
-                      @if($worker->image2)
-                      <li data-target="#myCarousel" data-slide-to="1"></li>
-                      @endif
-                      @if($worker->image3)
-                      <li data-target="#myCarousel" data-slide-to="1"></li>
-                      @endif
-                      @if($worker->image4)
-                      <li data-target="#myCarousel" data-slide-to="1"></li>
-                      @endif
-                      @if($worker->image5)
-                      <li data-target="#myCarousel" data-slide-to="1"></li>
-                      @endif
-                      @if($worker->image6)
-                      <li data-target="#myCarousel" data-slide-to="1"></li>
-                      @endif
-
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                      @if($worker->image1)
-                      <div class="item active">
-                        <img src="{{url($worker->image1)}}" style="height: 100%;">
-                      </div>
-                      @endif
-                      @if($worker->image2)
-                      <div class="item">
-                        <img src="{{url($worker->image2)}}" style="height: 100%;">
-                      </div>
-                      @endif
-                      @if($worker->image3)
-                      <div class="item">
-                        <img src="{{url($worker->image3)}}"style="height: 100%;">
-                      </div>
-                      @endif
-                      @if($worker->image4)
-                      <div class="item">
-                        <img src="{{url($worker->image4)}}"style="height: 100%;">
-                      </div>
-                      @endif
-                      @if($worker->image5)
-                      <div class="item">
-                        <img src="{{url($worker->image5)}}"style="height: 100%;">
-                      </div>
-                      @endif
-                      @if($worker->image6)
-                      <div class="item">
-                        <img src="{{url($worker->image6)}}"style="height: 100%;">
-                      </div>
-                      @endif
-                    </div>
-                  @if($worker->image1)
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  @endif
-                  </div>
-                  </div>
-
-                  <div style="text-align: center">
-                    <iframe width="80%" height="80%" src="http://www.youtube.com/embed/{{$worker->video}}" frameborder="0" allowfullscreen></iframe>
-                  </div>
-              </div><!-- /.row -->
-          </div>
-
-
-
-
-
       </div><!-- /.widget-user -->
     </div><!-- /.col -->
 </div>
+
+
+@if (Auth::user()->role->name == "Admin")
+<div class="row">
+        <div class="col-xs-12">
+          @if (Auth::user()->role->name == "Admin" OR Auth::user()->role->name == "Client")
+            <a href="{{route($routeGenerator->make('image.create', auth()->user()), $worker->id)}}" class="btn btn-block btn-danger">New Image</a>
+          @endif
+        </div>
+</div>
+<br>
+<div class="row">
+        <div class="col-xs-12">
+          @if (Auth::user()->role->name == "Admin" OR Auth::user()->role->name == "Client")
+            <a href="{{route($routeGenerator->make('video.create', auth()->user()), $worker->id)}}" class="btn btn-block btn-danger">New Video</a>
+          @endif
+        </div>
+</div>
+@endif
+<div class="row"  style="margin-top:10px;">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">List of Media</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table id="" class="table asc1 table-bordered table-striped">
+                    <thead>
+                        <tr>
+
+                            <th>Image</th>
+                            <th>Video</th>
+                            @if (Auth::user()->role->name == "Admin")
+                            <th class="not-export-col">Actions</th>
+                            @endif
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach ($worker->medias()->get() as $media)
+                            <tr>
+                            <td>@if($media->image)
+                              <img src="{{url($media->image)}}" class="img-circle" alt="User Image" style="max-width: 40px;">
+                            @endif
+                            </td>
+                            <td>@if($media->video)
+                              <a href="https://www.youtube.com/watch?v={{($media->video)}}" target="_blank">https://www.youtube.com/watch?v={{($media->video)}}</a>
+                            @endif
+                            </td>
+                            @if (Auth::user()->role->name == "Admin")
+							              <td>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a href="{{route($routeGenerator->make('media.delete', auth()->user()), $media->id)}}" class="btn btn-block btn-primary" data-toggle="confirmation">Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                            @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+
+                            <th>Image</th>
+                            <th>Video</th>
+                            @if (Auth::user()->role->name == "Admin")
+                            <th class="not-export-col hidden">Actions</th>
+                            @endif
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
 
 
 

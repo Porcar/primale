@@ -15,4 +15,10 @@ class Sexdate extends Model
   {
       return $this->belongsTo('App\Worker');
   }
+
+  public function tagsworkers()
+  {
+      return $this->belongsToMany('App\TagWorker');
+  }
+
 }

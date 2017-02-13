@@ -37,14 +37,14 @@
                     </a>
                     </li>
 @endif
-@if (Auth::user()->role->name == "Admin")
+@if (Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Provider")
                     <li>
                     <a href="{{route($routeGenerator->make('client', auth()->user()))}}">
                         <i class="fa fa-child"></i> <span>Clients</span>
                     </a>
                     </li>
-@endif
 
+@endif
                     <li>
                     <a href="{{route($routeGenerator->make('sexdate', auth()->user()))}}">
                         <i class="fa fa-calendar"></i> <span>SexDates</span>

@@ -44,6 +44,10 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Sessions</th>
+                            <th>Hours</th>
                             @if (Auth::user()->role->name == "Admin")
                             <th class="not-export-col">Actions</th>
                           @endif
@@ -54,6 +58,21 @@
 
                             <tr>
                             <td>{{$tag->name}}</td>
+                            <td>{{$tag->description}}</td>
+                            <td>
+                            @if ($tag->normal == True)
+                              | Normal |
+                            @endif
+                            @if ($tag->sado == True)
+                              | Sado |
+                            @endif
+                            @if ($tag->experience == True)
+                              | Experience |
+                            @endif
+                          </td>
+                            <td>{{$tag->sessions}}</td>
+                            <td>{{$tag->hours}}</td>
+
 
                             @if (Auth::user()->role->name == "Admin")
 							                       <td>
@@ -73,8 +92,11 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Name</th>
-
+                          <th>Name</th>
+                          <th>Description</th>
+                          <th>Type</th>
+                          <th>Sessions</th>
+                          <th>Hours</th>
                             @if (Auth::user()->role->name == "Admin")
                             <th class="not-export-col hidden">Actions</th>
                           @endif

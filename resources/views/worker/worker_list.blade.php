@@ -63,8 +63,8 @@
                             <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $worker->id)}}">{{$worker->user->name}}</a></td>
                             <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $worker->id)}}">{{$worker->user->lastname}}</td>
                             <td>
-                              @foreach($worker->tags as $tag)
-                                | {{$tag->name}} |
+                              @foreach($worker->tagsworkers as $tag)
+                                | {{$tag->tag->name}} |
                               @endforeach
                             </td>
                             <td>

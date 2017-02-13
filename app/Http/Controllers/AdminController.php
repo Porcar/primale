@@ -15,6 +15,9 @@ use App\Sexdate;
 use App\Stock;
 use App\Role;
 use App\Tag;
+use App\TagWorker;
+use App\Media;
+use App\Schedule;
 use App\Services\RouteGeneratorService;
 
 
@@ -115,22 +118,15 @@ class AdminController extends Controller
   public function show_provider($id)
   {
       $provider = Provider::find($id);
-      $workers = Worker::where('provider_id',$provider->id)->get();
 
-      return view("provider.show")->with(compact('provider','workers'));
+      return view("provider.show")->with(compact('provider'));
   }
 
     public function users_worker()
     {
       $tags = Tag::All();
+      $workers = Worker::All();
 
-      if(Auth::user()->role->name == "Admin"){
-        $workers = Worker::All();
-      }elseif(Auth::user()->role->name == "Client"){
-        $workers = Worker::All();
-      }elseif(Auth::user()->role->name == "Provider"){
-        $workers = Worker::where('provider_id', Auth::user()->provider->id)->get();
-      }
       return view('worker.worker_list')->with(compact('workers','tags'));
     }
 
@@ -172,79 +168,94 @@ class AdminController extends Controller
         $worker->user_id = $user->id;
         $worker->description = $request->input('description');
         $worker->age = $request->input('age');
-        $worker->price = $request->input('price');
-        if(Auth::user()->role->name == "Admin"){
-          $worker->provider_id = Auth::user()->id;
+        if ($request->input('location_workersplace') == "on") {
+            $worker->location_workersplace = True;
         }else{
-        $worker->provider_id = Auth::user()->provider->id;
+            $worker->location_workersplace = False;
+        }
+        if ($request->input('location_clientsplace') == "on") {
+            $worker->location_clientsplace = True;
+        }else{
+            $worker->location_clientsplace = False;
+        }
+        if ($request->input('location_hotel') == "on") {
+            $worker->location_hotel = True;
+        }else{
+            $worker->location_hotel = False;
+        }
+        if ($request->input('location_other') == "on") {
+            $worker->location_other = True;
+        }else{
+            $worker->location_other = False;
         }
         if ($request->input('sex') == "True") {
             $worker->sex = True;
         }else{
             $worker->sex = False;
         }
-
-        if ($request->input('monday_active') == True) {
-            $worker->monday_active = True;
-            $worker->monday_hours = $request->input('monday_hours');
-        }else{
-            $worker->monday_active = False;
-            $worker->monday_hours = 0;
-        }
-        if ($request->input('tuesday_active') == True) {
-            $worker->tuesday_active = True;
-            $worker->tuesday_hours = $request->input('tuesday_hours');
-        }else{
-            $worker->tuesday_active = False;
-            $worker->tuesday_hours = 0;
-        }
-        if ($request->input('wednesday_active') == True) {
-            $worker->wednesday_active = True;
-            $worker->wednesday_hours = $request->input('wednesday_hours');
-        }else{
-            $worker->wednesday_active = False;
-            $worker->wednesday_hours = 0;
-        }
-        if ($request->input('thursday_active') == True) {
-            $worker->thursday_active = True;
-            $worker->thursday_hours = $request->input('thursday_hours');
-        }else{
-            $worker->thursday_active = False;
-            $worker->thursday_hours = 0;
-        }
-        if ($request->input('friday_active') == True) {
-            $worker->friday_active = True;
-            $worker->friday_hours = $request->input('friday_hours');
-        }else{
-            $worker->friday_active = False;
-            $worker->friday_hours = 0;
-        }
-        if ($request->input('saturday_active') == True) {
-            $worker->saturday_active = True;
-            $worker->saturday_hours = $request->input('saturday_hours');
-        }else{
-            $worker->saturday_active = False;
-            $worker->saturday_hours = 0;
-        }
-        if ($request->input('sunday_active') == True) {
-            $worker->sunday_active = True;
-            $worker->sunday_hours = $request->input('sunday_hours');
-        }else{
-            $worker->sunday_active = False;
-            $worker->sunday_hours = 0;
-        }
-
-
         $worker->save();
+
+
+
+        $schedule = new Schedule();
+        $schedule->worker_id = $worker->id;
+        if ($request->input('monday_active') == "on") {
+            $schedule->monday_start_hour = $request->input('monday_start_hour');
+            $schedule->monday_end_hour = $request->input('monday_end_hour');
+            $schedule->monday_active = True;
+            $schedule->monday_hours = $request->input('monday_end_hour') - $request->input('monday_start_hour');
+        }
+        if ($request->input('tuesday_active') == "on") {
+            $schedule->tuesday_start_hour = $request->input('tuesday_start_hour');
+            $schedule->tuesday_end_hour = $request->input('tuesday_end_hour');
+            $schedule->tuesday_active = True;
+            $schedule->tuesday_hours = $request->input('tuesday_end_hour') - $request->input('tuesday_start_hour');
+        }
+        if ($request->input('wednesday_active') == "on") {
+            $schedule->wednesday_start_hour = $request->input('wednesday_start_hour');
+            $schedule->wednesday_end_hour = $request->input('wednesday_end_hour');
+            $schedule->wednesday_active = True;
+            $schedule->wednesday_hours = $request->input('wednesday_end_hour') - $request->input('wednesday_start_hour');
+        }
+        if ($request->input('thursday_active') == "on") {
+            $schedule->thursday_start_hour = $request->input('thursday_start_hour');
+            $schedule->thursday_end_hour = $request->input('thursday_end_hour');
+            $schedule->thursday_active = True;
+            $schedule->thursday_hours = $request->input('thursday_end_hour') - $request->input('thursday_start_hour');
+        }
+        if ($request->input('friday_active') == "on") {
+            $schedule->friday_start_hour = $request->input('friday_start_hour');
+            $schedule->friday_end_hour = $request->input('friday_end_hour');
+            $schedule->friday_active = True;
+            $schedule->friday_hours = $request->input('friday_end_hour') - $request->input('friday_start_hour');
+        }
+        if ($request->input('saturday_active') == "on") {
+            $schedule->saturday_start_hour = $request->input('saturday_start_hour');
+            $schedule->saturday_end_hour = $request->input('saturday_end_hour');
+            $schedule->saturday_active = True;
+            $schedule->saturday_hours = $request->input('saturday_end_hour') - $request->input('saturday_start_hour');
+        }
+        if ($request->input('sunday_active') == "on") {
+            $schedule->sunday_start_hour = $request->input('sunday_start_hour');
+            $schedule->sunday_end_hour = $request->input('sunday_end_hour');
+            $schedule->sunday_active = True;
+            $schedule->sunday_hours = $request->input('sunday_end_hour') - $request->input('sunday_start_hour');
+        }
+
+        $schedule->save();
+
 
 
         $tags = Tag::All();
         foreach ($tags as $tag) {
             if ($request->has('tag_'.$tag->id)) {
-                $worker->tags()->attach($tag->id);
+                $tag_worker = new TagWorker();
+                $tag_worker->worker_id = $worker->id;
+                $tag_worker->tag_id = $tag->id;
+                $tag_worker->price = $request->input('price_'.$tag->id);
+                $tag_worker->save();
             }
         }
-
 
         return redirect()->route('admin.worker');
     }
@@ -281,60 +292,27 @@ class AdminController extends Controller
         $worker->user->address = $request->input('address');
         $worker->user->save();
 
-
         $worker->description = $request->input('description');
         $worker->age = $request->input('age');
-        $worker->price = $request->input('price');
-
-
-        if ($request->input('monday_active') == True) {
-            $worker->monday_active = True;
-            $worker->monday_hours = $request->input('monday_hours');
+        if ($request->input('location_workersplace') == "on") {
+            $worker->location_workersplace = True;
         }else{
-            $worker->monday_active = False;
-            $worker->monday_hours = 0;
+            $worker->location_workersplace = False;
         }
-        if ($request->input('tuesday_active') == True) {
-            $worker->tuesday_active = True;
-            $worker->tuesday_hours = $request->input('tuesday_hours');
+        if ($request->input('location_clientsplace') == "on") {
+            $worker->location_clientsplace = True;
         }else{
-            $worker->tuesday_active = False;
-            $worker->tuesday_hours = 0;
+            $worker->location_clientsplace = False;
         }
-        if ($request->input('wednesday_active') == True) {
-            $worker->wednesday_active = True;
-            $worker->wednesday_hours = $request->input('wednesday_hours');
+        if ($request->input('location_hotel') == "on") {
+            $worker->location_hotel = True;
         }else{
-            $worker->wednesday_active = False;
-            $worker->wednesday_hours = 0;
+            $worker->location_hotel = False;
         }
-        if ($request->input('thursday_active') == True) {
-            $worker->thursday_active = True;
-            $worker->thursday_hours = $request->input('thursday_hours');
+        if ($request->input('location_other') == "on") {
+            $worker->location_other = True;
         }else{
-            $worker->thursday_active = False;
-            $worker->thursday_hours = 0;
-        }
-        if ($request->input('friday_active') == True) {
-            $worker->friday_active = True;
-            $worker->friday_hours = $request->input('friday_hours');
-        }else{
-            $worker->friday_active = False;
-            $worker->friday_hours = 0;
-        }
-        if ($request->input('saturday_active') == True) {
-            $worker->saturday_active = True;
-            $worker->saturday_hours = $request->input('saturday_hours');
-        }else{
-            $worker->saturday_active = False;
-            $worker->saturday_hours = 0;
-        }
-        if ($request->input('sunday_active') == True) {
-            $worker->sunday_active = True;
-            $worker->sunday_hours = $request->input('sunday_hours');
-        }else{
-            $worker->sunday_active = False;
-            $worker->sunday_hours = 0;
+            $worker->location_other = False;
         }
 
         if ($request->input('sex') == "True") {
@@ -342,80 +320,67 @@ class AdminController extends Controller
         }else{
             $worker->sex = False;
         }
-
-
-
-
-        if ($request->file('image1')) {
-            if ($request->file('image1')->isValid())
-            {
-                $destinationPath = base_path() . '/public/img/';
-                $image_name = $request->file('image1')->getClientOriginalName();
-                $image = $request->file('image1')->move($destinationPath, $image_name);
-                $image_name = $image->getBasename();
-                $worker->image1 = "img/".$image_name;
-            }
-        }
-        if ($request->file('image2')) {
-            if ($request->file('image2')->isValid())
-            {
-                $destinationPath = base_path() . '/public/img/';
-                $image_name = $request->file('image2')->getClientOriginalName();
-                $image = $request->file('image2')->move($destinationPath, $image_name);
-                $image_name = $image->getBasename();
-                $worker->image2 = "img/".$image_name;
-            }
-        }
-        if ($request->file('image3')) {
-            if ($request->file('image3')->isValid())
-            {
-                $destinationPath = base_path() . '/public/img/';
-                $image_name = $request->file('image3')->getClientOriginalName();
-                $image = $request->file('image3')->move($destinationPath, $image_name);
-                $image_name = $image->getBasename();
-                $worker->image3 = "img/".$image_name;
-            }
-        }
-        if ($request->file('image4')) {
-            if ($request->file('image4')->isValid())
-            {
-                $destinationPath = base_path() . '/public/img/';
-                $image_name = $request->file('image4')->getClientOriginalName();
-                $image = $request->file('image4')->move($destinationPath, $image_name);
-                $image_name = $image->getBasename();
-                $worker->image4 = "img/".$image_name;
-            }
-        }
-        if ($request->file('image5')) {
-            if ($request->file('image5')->isValid())
-            {
-                $destinationPath = base_path() . '/public/img/';
-                $image_name = $request->file('image5')->getClientOriginalName();
-                $image = $request->file('image5')->move($destinationPath, $image_name);
-                $image_name = $image->getBasename();
-                $worker->image5 = "img/".$image_name;
-            }
-        }
-        if ($request->file('image6')) {
-            if ($request->file('image6')->isValid())
-            {
-                $destinationPath = base_path() . '/public/img/';
-                $image_name = $request->file('image6')->getClientOriginalName();
-                $image = $request->file('image6')->move($destinationPath, $image_name);
-                $image_name = $image->getBasename();
-                $worker->image6 = "img/".$image_name;
-            }
-        }
-
-        $worker->video = $this->YoutubeID($request->input('video'));
         $worker->save();
 
+        $schedule = $worker->schedule;
+        if ($request->input('monday_active') == "on") {
+            $schedule->monday_start_hour = $request->input('monday_start_hour');
+            $schedule->monday_end_hour = $request->input('monday_end_hour');
+            $schedule->monday_active = True;
+            $schedule->monday_hours = $request->input('monday_end_hour') - $request->input('monday_start_hour');
+        }else{$schedule->monday_active = False;}
+        if ($request->input('tuesday_active') == "on") {
+            $schedule->tuesday_start_hour = $request->input('tuesday_start_hour');
+            $schedule->tuesday_end_hour = $request->input('tuesday_end_hour');
+            $schedule->tuesday_active = True;
+            $schedule->tuesday_hours = $request->input('tuesday_end_hour') - $request->input('tuesday_start_hour');
+        }else{$schedule->tuesday_active = False;}
+        if ($request->input('wednesday_active') == "on") {
+            $schedule->wednesday_start_hour = $request->input('wednesday_start_hour');
+            $schedule->wednesday_end_hour = $request->input('wednesday_end_hour');
+            $schedule->wednesday_active = True;
+            $schedule->wednesday_hours = $request->input('wednesday_end_hour') - $request->input('wednesday_start_hour');
+        }else{$schedule->wednesday_active = False;}
+        if ($request->input('thursday_active') == "on") {
+            $schedule->thursday_start_hour = $request->input('thursday_start_hour');
+            $schedule->thursday_end_hour = $request->input('thursday_end_hour');
+            $schedule->thursday_active = True;
+            $schedule->thursday_hours = $request->input('thursday_end_hour') - $request->input('thursday_start_hour');
+        }else{$schedule->thursday_active = False;}
+        if ($request->input('friday_active') == "on") {
+            $schedule->friday_start_hour = $request->input('friday_start_hour');
+            $schedule->friday_end_hour = $request->input('friday_end_hour');
+            $schedule->friday_active = True;
+            $schedule->friday_hours = $request->input('friday_end_hour') - $request->input('friday_start_hour');
+        }else{$schedule->friday_active = False;}
+        if ($request->input('saturday_active') == "on") {
+            $schedule->saturday_start_hour = $request->input('saturday_start_hour');
+            $schedule->saturday_end_hour = $request->input('saturday_end_hour');
+            $schedule->saturday_active = True;
+            $schedule->saturday_hours = $request->input('saturday_end_hour') - $request->input('saturday_start_hour');
+        }else{$schedule->saturday_active = False;}
+        if ($request->input('sunday_active') == "on") {
+            $schedule->sunday_start_hour = $request->input('sunday_start_hour');
+            $schedule->sunday_end_hour = $request->input('sunday_end_hour');
+            $schedule->sunday_active = True;
+            $schedule->sunday_hours = $request->input('sunday_end_hour') - $request->input('sunday_start_hour');
+        }else{$schedule->sunday_active = False;}
 
-        $worker->tags()->detach();
+        $schedule->save();
+
+
+
+        foreach($worker->tagsworkers as $tagsw){
+          $tagsw->delete();
+        }
         $tags = Tag::All();
         foreach ($tags as $tag) {
             if ($request->has('tag_'.$tag->id)) {
-                $worker->tags()->attach($tag->id);
+                $tag_worker = new TagWorker();
+                $tag_worker->worker_id = $worker->id;
+                $tag_worker->tag_id = $tag->id;
+                $tag_worker->price = $request->input('price');
+                $tag_worker->save();
             }
         }
 
@@ -443,9 +408,7 @@ class AdminController extends Controller
     public function show_worker($id)
     {
         $worker = Worker::find($id);
-        $tags = Tag::All();
-
-        return view("worker.show")->with(compact('worker', 'tags'));
+        return view("worker.show")->with(compact('worker'));
     }
 
 
@@ -565,20 +528,62 @@ class AdminController extends Controller
         {
 
 
+            $worker = Worker::find($request->input('worker_id'));
+            $sexyday = new DateTime($request->input('date')) ;
+            $sexyday = $sexyday->format("l");
+
             $sexdate = new Sexdate();
-            $sexdate->worker_id = $request->input('worker_id');
-            $sexdate->day = $request->input('days');
-            $sexdate->status = 'doing';
-            $sexdate->hours = $request->input('hours');
-            $sexdate->observation = $request->input('observation');
             if(Auth::user()->role->name == "Admin"){
               $sexdate->client_id = Auth::user()->id;
             }else{
               $sexdate->client_id = Auth::user()->client->id;
             }
+            $sexdate->worker_id = $request->input('worker_id');
+
+            $sexdate->day = $request->input('days');
+            $sexdate->start_hour = 0;
+            $sexdate->end_hour = 0;
+            $sexdate->hours = $request->input('hours');
+            $sexdate->location = $request->input('location');
+            $sexdate->observation = $request->input('observation');
             $sexdate->save();
 
-              return redirect()->route('admin.sexdate');
+            $worker = Worker::find($request->input('worker_id'));
+            foreach($worker->tagsworkers as $tagsw){
+              if($tagsw->id == $request->input('tag_'.$tagsw->id))
+                  $sexdate->tagsworkers()->attach($tagsw->id);
+            }
+
+
+/*
+            if (($worker->schedule->monday_active != 0) && ($sexyday == "Monday")) {
+
+                $sexdate = new Sexdate();
+                if(Auth::user()->role->name == "Admin"){
+                  $sexdate->client_id = Auth::user()->id;
+                }else{
+                  $sexdate->client_id = Auth::user()->client->id;
+                }
+                $sexdate->worker_id = $request->input('worker_id');
+
+                $sexdate->day = $request->input('days');
+                $sexdate->start_hour = 0;
+                $sexdate->end_hour = 0;
+                $sexdate->hours = $request->input('hours');
+                $sexdate->location = $request->input('location');
+                $sexdate->observation = $request->input('observation');
+                $sexdate->save();
+
+                $worker = Worker::find($request->input('worker_id'));
+                foreach($worker->tagsworkers as $tagsw){
+                  if($tagsw->id == $request->input('tag_'.$tag->id))
+                      $sexdate->tagsworkers()->attach($tagsw->id);
+                }
+
+            }
+*/
+
+            return redirect()->route($routeGenerator->make('sexdate', auth()->user()));
 
         }
 
@@ -606,11 +611,7 @@ class AdminController extends Controller
             }elseif(Auth::user()->role->name == "Worker"){
               $sexdates = Sexdate::where('worker_id', Auth::user()->worker->id)->get();
             }elseif(Auth::user()->role->name == "Provider"){
-              $workers = Worker::where('provider_id', Auth::user()->provider->id)->get();
               $sexdates = Sexdate::all();
-            }
-            if(Auth::user()->role->name == "Provider"){
-            return view('sexdate.sexdate_list')->with(compact('sexdates', 'workers'));
             }
             return view('sexdate.sexdate_list')->with(compact('sexdates'));
           }
@@ -736,7 +737,20 @@ class AdminController extends Controller
                 #create Stock
                 $tag = new Tag();
                 $tag->name = $request->input('name');
+                $tag->description = $request->input('description');
+                $tag->sessions = $request->input('sessions');
+                $tag->hours = $request->input('hours');
+                if ($request->input('normal') == True) {
+                    $tag->normal = True;
+                }
+                if($request->input('sado') == True){
+                    $tag->sado = True;
+                }
+                if($request->input('experience') == True){
+                  $tag->experience = True;
+                }
                 $tag->save();
+
 
 
                 return redirect()->route($routeGenerator->make('tag', auth()->user()));
@@ -765,6 +779,24 @@ class AdminController extends Controller
                 #create Unit
                 $tag = Tag::find($id);
                 $tag->name = $request->input('name');
+                $tag->description = $request->input('description');
+                $tag->sessions = $request->input('sessions');
+                $tag->hours = $request->input('hours');
+                if ($request->input('normal') == True) {
+                    $tag->normal = True;
+                }else {
+                  $tag->normal = False;
+                }
+                if($request->input('sado') == True){
+                    $tag->sado = True;
+                }else{
+                  $tag->sado = False;
+                }
+                if($request->input('experience') == True){
+                  $tag->experience = True;
+                }else {
+                  $tag->experience = False;
+                }
                 $tag->save();
 
                 return redirect()->route($routeGenerator->make('tag', auth()->user()));

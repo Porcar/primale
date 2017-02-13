@@ -21,11 +21,15 @@ class CreateSexDatesTable extends Migration
 
         $table->integer('worker_id')->unsigned();
         $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade')->onUpdate('cascade');
+
+        $table->integer('start_hour')->unsigned()->default(0);
+        $table->integer('end_hour')->unsigned()->default(0);
+
         $table->string('day');
         $table->date('date')->nullable();
         $table->integer('hours');
-        $table->enum('status', array('pending', 'doing', 'done'));
-        $table->string('observation');
+        $table->string('location');
+        $table->string('observation')->nullable();
         $table->timestamps();
       });
     }

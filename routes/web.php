@@ -25,7 +25,8 @@ Route::group(['middleware' => 'guest'], function () {
 	// Authentication routes...
 	Route::get('auth/login', [ 'as' => 'login', 'uses' => 'LoginController@index']);
 	Route::post('auth/login', [ 'as' => 'post.login', 'uses' => 'LoginController@login']);
-
+	Route::get('users/worker', [ 'as' => 'worker', 'uses' => 'AdminController@users_worker']);
+	Route::get('users/worker/show/{id}', [ 'as' => 'worker.show', 'uses' => 'AdminController@show_worker']);
 });
 
 //auth routes
@@ -94,6 +95,14 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('admin/tag/edit/{id}', [ 'as' => 'admin.tag.edit', 'uses' => 'AdminController@edit_tag']);
 		Route::put('admin/tag/update/{id}', [ 'as' => 'admin.tag.update', 'uses' => 'AdminController@update_tag']);
 		Route::get('admin/tag/delete/{id}', [ 'as' => 'admin.tag.delete', 'uses' => 'AdminController@delete_tag']);
+
+		//Medias
+		Route::get('admin/media', [ 'as' => 'admin.media', 'uses' => 'MediaController@media']);
+		Route::get('admin/image/create/{id}', [ 'as' => 'admin.image.create', 'uses' => 'MediaController@image_create']);
+		Route::post('admin/image/create', [ 'as' => 'admin.image.post', 'uses' => 'MediaController@create_image']);
+		Route::get('admin/video/create/{id}', [ 'as' => 'admin.video.create', 'uses' => 'MediaController@video_create']);
+		Route::post('admin/video/create', [ 'as' => 'admin.video.post', 'uses' => 'MediaController@create_video']);
+		Route::get('admin/media/delete/{id}', [ 'as' => 'admin.media.delete', 'uses' => 'MediaController@delete']);
 });
 
 
@@ -124,14 +133,21 @@ Route::group(['middleware' => 'provider'], function () {
 
 
 	//Clients
+		Route::get('provider/users/client', [ 'as' => 'provider.client', 'uses' => 'AdminController@users_client']);
+		Route::get('provider/users/client/create', [ 'as' => 'provider.client.create', 'uses' => 'AdminController@users_client_create']);
+		Route::post('provider/client/create', [ 'as' => 'provider.client.post', 'uses' => 'AdminController@create_client_user']);
 		Route::get('provider/users/client/show/{id}', [ 'as' => 'provider.client.show', 'uses' => 'AdminController@show_client']);
+		Route::get('provider/users/client/edit/{id}', [ 'as' => 'provider.client.edit', 'uses' => 'AdminController@edit_client']);
+		Route::put('provider/users/client/update/{id}', [ 'as' => 'provider.client.update', 'uses' => 'AdminController@update_client']);
 
 
 
 		//Sexdates
-			Route::get('provider/users/sexdate', [ 'as' => 'provider.sexdate', 'uses' => 'AdminController@sexdate']);
-			Route::get('provider/users/sexdate/show/{id}', [ 'as' => 'provider.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
-			Route::get('provider/sexdate/delete/{id}', [ 'as' => 'provider.sexdate.delete', 'uses' => 'AdminController@delete_sexdate']);
+		Route::get('provider/users/sexdate', [ 'as' => 'provider.sexdate', 'uses' => 'AdminController@sexdate']);
+
+		Route::get('provider/users/sexdate/show/{id}', [ 'as' => 'provider.sexdate.show', 'uses' => 'AdminController@show_sexdate']);
+
+		Route::get('provider/sexdate/delete/{id}', [ 'as' => 'provider.sexdate.delete', 'uses' => 'AdminController@delete_sexdate']);
 
 
 });

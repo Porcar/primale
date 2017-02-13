@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-  public function workers()
+  public function tagsworkers()
   {
-      return $this->belongsToMany('App\Worker');
+      return $this->hasMany('App\TagWorker');
   }
 }

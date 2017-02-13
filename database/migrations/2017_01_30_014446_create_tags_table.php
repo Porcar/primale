@@ -16,6 +16,12 @@ class CreateTagsTable extends Migration
       Schema::create('tags', function (Blueprint $table) {
           $table->increments('id');
           $table->string('name');
+          $table->string('description');
+          $table->integer('sessions')->nullable();
+          $table->integer('hours')->nullable();
+          $table->boolean('normal')->default(False);
+          $table->boolean('sado')->default(False);
+          $table->boolean('experience')->default(False);
           $table->timestamps();
       });
     }

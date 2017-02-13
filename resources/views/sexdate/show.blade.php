@@ -72,6 +72,26 @@
                           <span class="description-text">{{$sexdate->observation}}</span>
                       </div><!-- /.description-block -->
                   </div><!-- /.col -->
+                  <div class="col-xs-12">
+                      <div class="description-block">
+                          <h5 class="description-header">Location</h5>
+                          <span class="description-text">{{$sexdate->location}}</span>
+                      </div><!-- /.description-block -->
+                  </div><!-- /.col -->
+                  <div class="col-xs-12">
+                      <div class="description-block">
+                          <h5 class="description-header">Tags</h5>
+                          <span class="description-text">
+                            @foreach($sexdate->tagsworkers as $tag)
+                              | {{$tag->name}} |
+                            @endforeach
+                            </span>
+                      </div><!-- /.description-block -->
+                  </div><!-- /.col -->
+
+
+
+
               </div><!-- /.row -->
           </div>
       </div><!-- /.widget-user -->

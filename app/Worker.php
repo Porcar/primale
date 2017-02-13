@@ -14,17 +14,24 @@ class Worker extends Model
   {
       return $this->belongsTo('App\User');
   }
-
-  public function provider()
+  
+  public function tagsworkers()
   {
-      return $this->belongsTo('App\Provider');
-  }
-  public function tags()
-  {
-      return $this->belongsToMany('App\Tag');
+      return $this->hasMany('App\TagWorker');
   }
   public function sexdates()
   {
       return $this->hasMany('App\Sexdate');
   }
+
+  public function schedule()
+  {
+      return $this->hasOne('App\Schedule');
+  }
+
+  public function medias()
+  {
+      return $this->hasMany('App\Media');
+  }
+
 }

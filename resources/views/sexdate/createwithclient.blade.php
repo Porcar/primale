@@ -48,6 +48,35 @@
 
               <div class="box-body">
 
+
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Tags</label>
+                  <div class="col-sm-4">
+                      @foreach ($worker->tagsworkers as $tag)
+                      <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" name="tag_{{$tag->id}}">
+                          </span>
+                          <span class="input-group-addon">  {{$tag->tag->name}}
+
+                            @if ($tag->tag->normal == True)
+                              - Normal
+                            @endif
+                            @if ($tag->tag->sado == True)
+                              - Sado
+                            @endif
+                            @if ($tag->tag->experience == True)
+                              - Experience
+                            @endif
+                           </span>
+                           <span class="input-group-addon">  {{$tag->price}}</span>
+                    </div>
+                    @endforeach
+                  </div>
+                </div>
+
+
+
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Observation</label>
                   <div class="col-sm-10">
@@ -63,25 +92,25 @@
                   <label for="inputPassword3" class="col-sm-2 control-label">Days</label>
                   <div class="col-sm-2">
                       <select name="days" class="form-control" required="">
-                        @if($worker->monday_active == True)
+                        @if($worker->schedule->monday_active == True)
                           <option value="Monday">Monday</option>
                         @endif
-                        @if($worker->tuesday_active == True)
+                        @if($worker->schedule->tuesday_active == True)
                           <option value="Tuesday">Tuesday</option>
                         @endif
-                        @if($worker->wednesday_active == True)
+                        @if($worker->schedule->wednesday_active == True)
                           <option value="Wednesday">Wednesday</option>
                         @endif
-                        @if($worker->thursday_active == True)
+                        @if($worker->schedule->thursday_active == True)
                           <option value="Thursday">Thursday</option>
                         @endif
-                        @if($worker->friday_active == True)
+                        @if($worker->schedule->friday_active == True)
                           <option value="Friday">Friday</option>
                         @endif
-                        @if($worker->saturday_active == True)
+                        @if($worker->schedule->saturday_active == True)
                           <option value="Saturday">Saturday</option>
                         @endif
-                        @if($worker->sunday_active == True)
+                        @if($worker->schedule->sunday_active == True)
                           <option value="Sunday">Sunday</option>
                         @endif
                       </select>
@@ -94,6 +123,27 @@
 
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Location</label>
+                  <div class="col-sm-2">
+                      <select name="location" class="form-control" required="">
+                        @if($worker->location_workersplace == True)
+                          <option value="Workers Place">Workers Place</option>
+                        @endif
+                        @if($worker->location_clientsplace == True)
+                          <option value="Clients Place">Clients Place</option>
+                        @endif
+                        @if($worker->location_hotel == True)
+                          <option value="Hotel">Hotel</option>
+                        @endif
+                        @if($worker->location_other == True)
+                          <option value="Other">Other</option>
+                        @endif
+                      </select>
+                  </div>
+                </div>
+
 
 {{--
                 <div class="form-group">

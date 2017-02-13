@@ -48,15 +48,64 @@
 
 
 
-              <div class="box-body">
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  {!! Form::text('name', null, array('class' => 'form-control', 'placeholder'=>'Name...', 'required'=> 'True') ) !!}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                  {!! Form::text('description', null, array('class' => 'form-control', 'placeholder'=>'Description...', 'required'=> 'True') ) !!}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Hours</label>
+                <div class="col-sm-10">
+                  {!! Form::number('hours', null, array('class' => 'form-control', 'placeholder'=>'Hours...') ) !!}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Sessions</label>
+                <div class="col-sm-10">
+                  {!! Form::number('sessions', null, array('class' => 'form-control', 'placeholder'=>'Sessions...') ) !!}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Normal Sex</label>
+                <div class="col-sm-2">
+                  <div class="input-group">
+                        <span class="input-group-addon">
+                          <input type="checkbox" name="normal">
+                        </span>
 
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
-                  <div class="col-sm-10">
-                    {!! Form::text('name', null, array('class' => 'form-control', 'placeholder'=>'Name...', 'required'=> 'True') ) !!}
                   </div>
                 </div>
-              </div><!-- /.box-body -->
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Sado Sex</label>
+                <div class="col-sm-2">
+                  <div class="input-group">
+                        <span class="input-group-addon">
+                          <input type="checkbox" name="sado">
+                        </span>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Experience Sex</label>
+                <div class="col-sm-2">
+                  <div class="input-group">
+                        <span class="input-group-addon">
+                          <input type="checkbox" name="experience">
+                        </span>
+
+                  </div>
+                </div>
+              </div>
+
               <div class="box-footer">
 
                 <a href="{{ url()->previous() }}" class="btn btn-default">Cancel</a>

@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Provider extends Model
 {
   /**
-   * Get the user that owns the client.
+   * Get the user that owns the provider.
    */
   public function user()
   {
       return $this->belongsTo('App\User');
   }
 
-
-    public function workers()
-    {
-        return $this->hasMany('App\Worker');
-    }
 }

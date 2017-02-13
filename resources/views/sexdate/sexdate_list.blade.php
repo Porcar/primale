@@ -50,25 +50,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                   @if(Auth::user()->role->name == "Provider")
-                      @foreach ($workers as $worker)
-                        @foreach ($worker->sexdates as $sexdate)
-
-
-                        <tr>
-                            <td><a href="{{route($routeGenerator->make('sexdate.show', auth()->user()), $sexdate->id)}}">{{$sexdate->id}}</td>
-                            <td>{{$sexdate->day}}</td>
-                            <td>{{$sexdate->hours}}</td>
-                            <td><a href="{{route($routeGenerator->make('worker.show', auth()->user()), $sexdate->worker->id)}}">{{$sexdate->worker->user->name}}</td>
-                            <td>
-                              <a href="{{route($routeGenerator->make('client.show', auth()->user()), $sexdate->client->id)}}">
-                                {{$sexdate->client->user->name}}
-                              </td>
-                        </tr>
-
-                            @endforeach
-                            @endforeach
-                          @else
                               @foreach ($sexdates as $sexdate)
 
 
@@ -87,7 +68,7 @@
                                       </tr>
 
                                     @endforeach
-                          @endif
+                          
 
                     </tbody>
                     <tfoot>
